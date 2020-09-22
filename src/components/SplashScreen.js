@@ -1,15 +1,17 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
-// import LinearGradient from 'react-native-linear-gradient';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient';
+import * as Animatable from 'react-native-animatable';
 
 
 const SplashScreen = () => {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image
+          <Animatable.Image
+              animation='bounceIn'
+              duration={1500}
             source={require('../assets/images/logo.png')}
             style={styles.logo}
             resizeMode='stretch'

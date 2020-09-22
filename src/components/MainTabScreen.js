@@ -10,17 +10,18 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
+const ProfileStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 export default function MainTabScreen(){
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Find Ride"
       activeColor="#ce3624"
       style={{ backgroundColor: '#352e5d' }}
     >
       <Tab.Screen
-        name="Home"
+        name="Find Ride"
         component={HomeStackScreen}
         options={{
           tabBarColor: '#352e5d',
@@ -31,7 +32,7 @@ export default function MainTabScreen(){
         }}
       />
       <Tab.Screen
-        name="Notifications"
+        name="Post Ride"
         component={DetailsStackScreen}
         options={{
           tabBarColor: '#352e5d',
@@ -43,7 +44,7 @@ export default function MainTabScreen(){
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={ProfileStackScreen}
         options={{
           tabBarColor: '#352e5d',
           tabBarLabel: 'Profile',
@@ -92,6 +93,33 @@ function HomeStackScreen({navigation}){
       )
     }} />
     </HomeStack.Navigator>
+  )
+}
+function ProfileStackScreen({navigation}){
+  return (
+    <ProfileStack.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: '#352e5d'
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: { fontWeight:'bold' }
+    }}>
+      <ProfileStack.Screen name='Profile' component={ProfileScreen} options={{
+        title: 'SendIt!',
+        headerLeft: () => (
+        <FontAwesome.Button
+          name='bars'
+          color='#fff'
+          backgroundColor='#352e5d'
+          size={25}
+          onPress={() => {
+            navigation.openDrawer()
+          }}
+          >
+        </FontAwesome.Button>
+        )
+      }} />
+    </ProfileStack.Navigator>
   )
 }
 function DetailsStackScreen({navigation}) {

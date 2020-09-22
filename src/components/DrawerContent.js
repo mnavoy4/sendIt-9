@@ -43,6 +43,65 @@ export function DrawerContent(props){
               </View>
             </View>
           </View>
+
+          <Drawer.Section style={styles.drawerSection}>
+            <DrawerItem
+              icon={({color, size}) => (
+                <MaterialCommunityIcons
+                  name='car'
+                  color={color}
+                  size={size}
+                  onPress={() => {}}
+                />
+              )}
+              label='Find Ride'
+              onPress={() => props.navigation.navigate('Find Ride')}
+            />
+            <DrawerItem
+              icon={({color, size}) => (
+                <MaterialCommunityIcons
+                  name='seat-recline-normal'
+                  color={color}
+                  size={size}
+                />
+              )}
+              onPress={() => props.navigation.navigate('Post Ride')}
+              label='Post Ride'
+            />
+            <DrawerItem
+              icon={({color, size}) => (
+                <MaterialCommunityIcons
+                  name='account'
+                  color={color}
+                  size={size}
+                />
+              )}
+              onPress={() => props.navigation.navigate('Profile')}
+              label='Profile'
+            />
+            <DrawerItem
+              icon={({color, size}) => (
+                <MaterialCommunityIcons
+                  name='settings'
+                  color={color}
+                  size={size}
+                />
+              )}
+              onPress={() => props.navigation.navigate('SettingsScreen')}
+              label='Settings'
+            />
+            <DrawerItem
+              icon={({color, size}) => (
+                <MaterialCommunityIcons
+                  name='account-check'
+                  color={color}
+                  size={size}
+                />
+              )}
+              onPress={() => props.navigation.navigate('SupportScreen')}
+              label='Support'
+            />
+          </Drawer.Section>
         </View>
       </DrawerContentScrollView>
       <Drawer.Section style={styles.bottomDrawerSection}>

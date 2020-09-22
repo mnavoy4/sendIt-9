@@ -1,0 +1,12 @@
+{
+  "name": "sendIt9",
+  "displayName": "sendIt9",
+  "expo": {
+    "name": "sendIt9",
+    "slug": "sendIt9",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

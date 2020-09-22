@@ -1,5 +1,8 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, Dimensions } from 'react-native';
+import { FontAwesome, Feather } from '@expo/vector-icons'
+import { LinearGradient } from 'expo-linear-gradient';
+import * as Animatable from 'react-native-animatable';
 
 const SignUpScreen = () => {
     return (

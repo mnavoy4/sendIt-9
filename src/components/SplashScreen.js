@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
 
 
-const SplashScreen = () => {
+const SplashScreen = ({navigation}) => {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -17,13 +17,16 @@ const SplashScreen = () => {
             resizeMode='stretch'
           />
         </View>
-        <View style={styles.footer}>
+        <Animatable.View
+          style={styles.footer}
+          animation='fadeInUpBig'
+        >
           <Text style={styles.title}>Heading to the mountains?</Text>
           <Text style={styles.text}>Sign in</Text>
           <View style={styles.button}>
-            <TouchableOpacity onPress={() => alert('clicked')}>
+            <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
               <LinearGradient
-                colors={['#352e5d', '#200d3d']}
+                colors={['#352e5d', '#4d4678']}
                 style={styles.signIn}
               >
                 <Text style={styles.textSign}>Get Started</Text>
@@ -35,8 +38,7 @@ const SplashScreen = () => {
               </LinearGradient>
             </TouchableOpacity>
           </View>
-
-        </View>
+        </Animatable.View>
       </View>
     );
 };

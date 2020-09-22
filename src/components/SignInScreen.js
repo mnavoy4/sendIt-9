@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, Dimensions, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TextInput, TouchableOpacity, StatusBar } from 'react-native';
 import { FontAwesome, Feather } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
@@ -33,10 +33,11 @@ const SignInScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor='#352e5d' barStyle='light-content' />
       <View style={styles.header}>
         <Text style={styles.text_header}>Welcome to SendIt!</Text>
       </View>
-      <View style={styles.footer}>
+      <Animatable.View style={styles.footer} animation='fadeInUpBig'>
         <Text style={styles.text_footer}>Email</Text>
         <View style={styles.action}>
           <FontAwesome
@@ -107,10 +108,10 @@ const SignInScreen = ({navigation}) => {
             >
               <Text style={[styles.textSign, {
                 color: '#352e5d'
-              }]}>Sign Up</Text>
+              }]}>Create SendIt! Account</Text>
             </TouchableOpacity>
         </View>
-      </View>
+      </Animatable.View>
     </View>
   );
 };

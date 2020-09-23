@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet, Dimensions, TextInput, TouchableOpacity, StatusBar } from 'react-native';
 import { FontAwesome, Feather } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
+import { AuthContext } from './context';
 
 const SignInScreen = ({navigation}) => {
 
@@ -11,7 +12,9 @@ const SignInScreen = ({navigation}) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [textInputChange, setTextInputChange] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [confirmSecureTextEntry, setConfirmSecureTextEntry] = useState(true)
+  const [confirmSecureTextEntry, setConfirmSecureTextEntry] = useState(true);
+
+  const { signUp } = useContext(AuthContext);
 
   const handleEmailInputChange = (input) => {
     if(input.length != 0){
@@ -40,12 +43,22 @@ const SignInScreen = ({navigation}) => {
   const handleConfirmSecureTextEntryChange = () => {
     setConfirmSecureTextEntry(!confirmSecureTextEntry)
   }
+  const handleSignUp = (email, password) => {
+    signUp(email, password)
+  }
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor='#352e5d' barStyle='light-content' />
       <View style={styles.header}>
-        <Text style={styles.text_header}>Welcome to SendIt!</Text>
+        <Text style={styles.text_header}>Create Account</Text>
+        <Animatable.Image
+              animation='bounceIn'
+              duration={1500}
+            source={require('../assets/images/logo.png')}
+            style={styles.logo}
+            resizeMode='stretch'
+          />
       </View>
       <Animatable.View style={styles.footer} animation='fadeInUpBig'>
         <Text style={styles.text_footer}>Email</Text>
@@ -133,12 +146,17 @@ const SignInScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.button}>
+          <TouchableOpacity
+            style={styles.signIn}
+            onPress={(email, password) => handleSignUp(email, password)}
+          >
             <LinearGradient
               colors={['#352e5d', '#4d4678']}
               style={styles.signIn}
             >
               <Text style={[styles.textSign, {color: '#fff'}]}>Create Account</Text>
             </LinearGradient>
+          </TouchableOpacity>
             <TouchableOpacity
               onPress={() => navigation.goBack()}
               style={[styles.signIn, {
@@ -159,16 +177,27 @@ const SignInScreen = ({navigation}) => {
 
 export default SignInScreen;
 
+const { height } = Dimensions.get('screen');
+const height_logo = height * 0.11;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1, 
     backgroundColor: '#352e5d'
   },
+  logo: {
+    top: 15,
+    marginTop: 5,
+    width: height_logo,
+    height: height_logo
+},
   header: {
       flex: 1,
+      alignItems: 'center',
       justifyContent: 'flex-end',
       paddingHorizontal: 20,
-      paddingBottom: 50
+      paddingBottom: 50,
+      paddingTop: 14
   },
   footer: {
       flex: 3,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import DetailsScreen from './DetailsScreen';
 import HomeScreen from './HomeScreen'
@@ -6,7 +6,9 @@ import ProfileScreen from './ProfileScreen'
 import { FontAwesome } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import ExploreScreen from './ExploreScreen';
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AuthContext } from './context';
+import SettingsScreen from './SettingsScreen';
 
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
@@ -14,6 +16,9 @@ const ProfileStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 export default function MainTabScreen(){
+
+  // const { signOut } = useContext(AuthContext);
+
   return (
     <Tab.Navigator
       initialRouteName="Find Ride"
@@ -54,13 +59,13 @@ export default function MainTabScreen(){
         }}
       />
       <Tab.Screen
-        name="Explore"
-        component={ExploreScreen}
+        name="Settings"
+        component={SettingsScreen}
         options={{
           tabBarColor: '#352e5d',
-          tabBarLabel: 'Sign Out',
+          tabBarLabel: 'Settings',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="logout" color={color} size={26} />
+            <MaterialCommunityIcons name="settings" color={color} size={26} />
           ),
         }}
       />

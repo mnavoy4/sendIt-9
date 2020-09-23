@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import {
@@ -12,10 +12,14 @@ import {
   Switch
 } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { AuthContext } from './context';
 
 
 
 export function DrawerContent(props){
+
+  const { signOut } = useContext(AuthContext)
+
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
@@ -111,10 +115,10 @@ export function DrawerContent(props){
               name='logout'
               color={color}
               size={size}
-              onPress={() => {}}
             />
           )}
           label='Sign Out'
+          onPress={() => {signOut()}}
         />
       </Drawer.Section>
     </View>

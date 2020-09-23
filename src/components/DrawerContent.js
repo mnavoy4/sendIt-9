@@ -88,7 +88,7 @@ export function DrawerContent(props){
                   size={size}
                 />
               )}
-              onPress={() => props.navigation.navigate('SettingsScreen')}
+              onPress={() => props.navigation.navigate('Settings')}
               label='Settings'
             />
             <DrawerItem

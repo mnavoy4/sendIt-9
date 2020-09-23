@@ -1,9 +1,11 @@
 import React from 'react';
 // import Map from './Map';
 import { SafeAreaView, ScrollView } from 'react-native';
-import { Button, Text, Form, Item, Input, Label } from 'native-base';
+import { Button, Form, Item, Input, Label } from 'native-base';
+import { Text, View, TouchableOpacity } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import createRideStyles from '../styles/CreateRideStyles';
-import NumericInput from 'react-native-numeric-input'
+import NumericInput from 'react-native-numeric-input';
 
 export default function CreateRideScreen(){
   return (
@@ -13,9 +15,19 @@ export default function CreateRideScreen(){
           Create a ride
         </Text>
         <Form style={createRideStyles.form}>
-          <Item>
-            <Button><Text>Choose Pick up and Drop off locations</Text></Button>
-          </Item>
+          <View style={createRideStyles.button}>
+            <TouchableOpacity
+              onPress={() => console.log('pressed')}
+              style={createRideStyles.signIn}
+            >
+              <LinearGradient
+                colors={['#352e5d', '#4d4678']}
+                style={createRideStyles.signIn}
+              >
+                <Text style={[createRideStyles.textSign, {color: '#fff'}]}>Choose pick up and drop off locations</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
           <Item stackedLabel>
             <Label >Pick up:</Label>
             <Input />
@@ -42,7 +54,18 @@ export default function CreateRideScreen(){
               totalHeight={75}
             />
           </Item>
-          <Button><Text>Post Ride</Text></Button>
+          <View style={createRideStyles.button}>
+            <TouchableOpacity
+              style={createRideStyles.signIn}
+            >
+              <LinearGradient
+                colors={['#352e5d', '#4d4678']}
+                style={createRideStyles.signIn}
+              >
+                <Text style={[createRideStyles.textSign, {color: '#fff'}]}>Post Ride</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
         </Form>
 
       </ScrollView>

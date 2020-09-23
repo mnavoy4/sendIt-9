@@ -10,6 +10,7 @@ import CreateRideScreen from './CreateRideScreen';
 const HomeStack = createStackNavigator();
 const CreateRideStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
+const SettingsStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 export default function MainTabScreen(){
@@ -55,7 +56,7 @@ export default function MainTabScreen(){
       />
       <Tab.Screen
         name="Settings"
-        component={SettingsScreen}
+        component={SettingsStackScreen}
         options={{
           tabBarColor: '#352e5d',
           tabBarLabel: 'Settings',
@@ -122,6 +123,33 @@ function ProfileStackScreen({navigation}){
     </ProfileStack.Navigator>
   )
 }
+function SettingsStackScreen({navigation}){
+  return (
+    <SettingsStack.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: '#352e5d'
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: { fontWeight:'bold' }
+    }}>
+      <SettingsStack.Screen name='Settings' component={SettingsScreen} options={{
+        title: 'SendIt!',
+        headerLeft: () => (
+        <FontAwesome.Button
+          name='bars'
+          color='#fff'
+          backgroundColor='#352e5d'
+          size={25}
+          onPress={() => {
+            navigation.openDrawer()
+          }}
+          >
+        </FontAwesome.Button>
+        )
+      }} />
+    </SettingsStack.Navigator>
+  )
+}
 function CreateRideStackScreen({navigation}) {
   return(
     <CreateRideStack.Navigator screenOptions={{
@@ -131,7 +159,7 @@ function CreateRideStackScreen({navigation}) {
       headerTintColor: '#fff',
       headerTitleStyle: { fontWeight:'bold' }
     }}>
-      <CreateRideStack.Screen name="Details" component={CreateRideScreen} options={{
+      <CreateRideStack.Screen name="SendIt!" component={CreateRideScreen} options={{
         headerLeft: () => (
           <FontAwesome.Button
             name='bars'

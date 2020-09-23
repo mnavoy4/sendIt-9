@@ -4,7 +4,9 @@ const width = Dimensions.get('window').width;
 
 const createRideStyles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   scrollView: {
     backgroundColor: '#ce3624',
@@ -12,8 +14,25 @@ const createRideStyles = StyleSheet.create({
     width: width
   },
   title: {
-    fontSize: 40,
+    fontSize: 36,
     textAlign: 'center',
+    fontWeight: 'bold',
+    marginTop: 25,
+    color: '#fff'
+  },
+  signIn: {
+    width: '95%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10
+  },
+  button: {
+    alignItems: 'center',
+    marginTop: 30
+  },
+  textSign: {
+    fontSize: 16,
     fontWeight: 'bold'
   },
   text: {

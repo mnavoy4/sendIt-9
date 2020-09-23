@@ -10,6 +10,7 @@ import RootStackScreen from './src/components/RootStackScreen';
 import { AuthContext } from './src/components/context';
 import AsyncStorage from '@react-native-community/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
+import MapStackScreen from './src/components/MapStackScreen';
 
 
 const Drawer = createDrawerNavigator();
@@ -101,7 +102,6 @@ export default function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        {/* <MapStack.Navigator name='Map' component={MapScreen} /> */}
         
         { 
           loginState.userToken != null ? (
@@ -109,6 +109,7 @@ export default function App() {
               <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
               <Drawer.Screen name="SupportScreen" component={SupportScreen} />
               <Drawer.Screen name="SettingsScreen" component={SettingsScreen} />
+              <Drawer.Screen name='Map' component={MapStackScreen} />
             </Drawer.Navigator>
         )
         :

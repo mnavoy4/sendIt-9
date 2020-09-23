@@ -1,13 +1,12 @@
 import React from 'react';
-// import Map from './Map';
 import { SafeAreaView, ScrollView } from 'react-native';
-import { Button, Form, Item, Input, Label } from 'native-base';
+import { Button, Form, Item, Input, Label, DatePicker } from 'native-base';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import createRideStyles from '../styles/CreateRideStyles';
 import NumericInput from 'react-native-numeric-input';
 
-export default function CreateRideScreen(){
+export default function CreateRideScreen({navigation}){
   return (
     <SafeAreaView style={createRideStyles.container}>
       <ScrollView style={createRideStyles.scrollView}>
@@ -17,7 +16,7 @@ export default function CreateRideScreen(){
         <Form style={createRideStyles.form}>
           <View style={createRideStyles.button}>
             <TouchableOpacity
-              onPress={() => console.log('pressed')}
+              onPress={() => navigation.navigate('Map')}
               style={createRideStyles.signIn}
             >
               <LinearGradient
@@ -36,27 +35,46 @@ export default function CreateRideScreen(){
             <Label >Drop off:</Label>
             <Input />
           </Item>
+          <Item stackedLabel>
+            <Label>Date:</Label>
+            <DatePicker
+              modalTransparent={false}
+              minimumDate={new Date()}
+            />
+
+          </Item>
+          <Item stackedLabel>
+            <Label>Departure Time:</Label>
+            <Input />
+          </Item>
           <Item style={createRideStyles.numericInputItem}>
             <Text>Seats available:</Text>
             <NumericInput
+              rounded
               onChange={value => console.log(value)}
               minValue={0}
               maxValue={8}
+              totalHeight={65}
+              totalWidth={150}
+              initValue={1}
             />
           </Item>
           <Item style={createRideStyles.numericInputItem}>
             <Text>Price per seat:</Text>
             <NumericInput
+              rounded
               onChange={value => console.log(value)}
               minValue={0}
               maxValue={100}
               step={5}
-              totalHeight={75}
+              totalHeight={65}
+              totalWidth={150}
             />
           </Item>
           <View style={createRideStyles.button}>
             <TouchableOpacity
               style={createRideStyles.signIn}
+              onPress={() => console.log('ride posted')}
             >
               <LinearGradient
                 colors={['#352e5d', '#4d4678']}

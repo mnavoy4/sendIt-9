@@ -163,7 +163,11 @@ const SignInScreen = ({navigation}) => {
             </LinearGradient>
           </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigation.navigate('SignUpScreen')}
+              onPress={() => {
+                setIsValidEmail(true);
+                setIsValidPassword(true);
+                navigation.navigate('SignUpScreen');
+              }}
               style={[styles.signIn, {
                 borderColor: '#352e5d',
                 borderWidth: 1,

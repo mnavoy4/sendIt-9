@@ -1,23 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import DetailsScreen from './DetailsScreen';
 import HomeScreen from './HomeScreen'
 import ProfileScreen from './ProfileScreen'
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
-import ExploreScreen from './ExploreScreen';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { AuthContext } from './context';
 import SettingsScreen from './SettingsScreen';
+import CreateRideScreen from './CreateRideScreen';
 
 const HomeStack = createStackNavigator();
-const DetailsStack = createStackNavigator();
+const CreateRideStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 export default function MainTabScreen(){
-
-  // const { signOut } = useContext(AuthContext);
 
   return (
     <Tab.Navigator
@@ -38,7 +33,7 @@ export default function MainTabScreen(){
       />
       <Tab.Screen
         name="Post Ride"
-        component={DetailsStackScreen}
+        component={CreateRideStackScreen}
         options={{
           tabBarColor: '#352e5d',
           tabBarLabel: 'Post Ride',
@@ -127,16 +122,16 @@ function ProfileStackScreen({navigation}){
     </ProfileStack.Navigator>
   )
 }
-function DetailsStackScreen({navigation}) {
+function CreateRideStackScreen({navigation}) {
   return(
-    <DetailsStack.Navigator screenOptions={{
+    <CreateRideStack.Navigator screenOptions={{
       headerStyle: {
         backgroundColor: '#352e5d'
       },
       headerTintColor: '#fff',
       headerTitleStyle: { fontWeight:'bold' }
     }}>
-      <DetailsStack.Screen name="Details" component={DetailsScreen} options={{
+      <CreateRideStack.Screen name="Details" component={CreateRideScreen} options={{
         headerLeft: () => (
           <FontAwesome.Button
             name='bars'
@@ -151,6 +146,6 @@ function DetailsStackScreen({navigation}) {
         )
       }}
       />
-  </DetailsStack.Navigator>
+  </CreateRideStack.Navigator>
   )
 }

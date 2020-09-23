@@ -6,10 +6,7 @@ import {
   Title,
   Caption,
   Paragraph,
-  Drawer,
-  Text,
-  TouchableRipple,
-  Switch
+  Drawer
 } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AuthContext } from './context';

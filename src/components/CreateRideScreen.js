@@ -38,6 +38,7 @@ export default function CreateRideScreen({navigation}){
           <Item stackedLabel>
             <Label>Date:</Label>
             <DatePicker
+              maximumDate={new Date(2022, 1, 1)}
               modalTransparent={false}
               minimumDate={new Date()}
             />

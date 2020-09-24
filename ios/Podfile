@@ -7,15 +7,28 @@ platform :ios, '10.0'
 target 'sendIt9' do
   use_unimodules!
   config = use_native_modules!
+  rn_maps_path = '../node_modules/react-native-maps'
 
   use_react_native!(:path => config["reactNativePath"])
-
+  pod 'react-native-google-maps', path: rn_maps_path
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
   # Enables Flipper.
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and
   # you should disable these next few lines.
   use_flipper!
-  post_install do |installer|
-    flipper_post_install(installer)
+  # post_install do |installer|
+  #   flipper_post_install(installer)
+  # end
+end
+post_install do |installer|
+  flipper_post_install(installer)
+  installer.pods_project.targets.each do |target|
+    if target.name == 'react-native-google-maps'
+      target.build_configurations.each do |config|
+        config.build_settings['CLANG_ENABLE_MODULES'] = 'No'
+      end
+    end
   end
 end

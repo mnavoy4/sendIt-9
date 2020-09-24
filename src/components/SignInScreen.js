@@ -34,7 +34,7 @@ const SignInScreen = ({navigation}) => {
     if (email.length == 0 || password.length == 0){
       Alert.alert('Invalid Input', 'Email or password field cannot be empty');
     }
-    if(foundUser.length == 0){
+    if(!foundUser){
       Alert.alert('Invalid User', 'Email or password is incorrect.', [
         {text: 'Okay'}
       ]);

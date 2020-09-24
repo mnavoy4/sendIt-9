@@ -1,5 +1,5 @@
 import React from 'react';
-import RNGooglePlaces from 'react-native-google-places';
+// import RNGooglePlaces from 'react-native-google-places';
 import store from '../store/store'
 import {
   GET_CURRENT_LOCATION_SUCCESS,
@@ -22,7 +22,7 @@ const getCurrentLocation = (dispatch, latitudeDelta, longitudeDelta) => {
             latitudeDelta,
             longitudeDelta
           }})
-      },
+      }, { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
       (error) => console.log(error.message), {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     );
   };

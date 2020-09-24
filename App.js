@@ -11,6 +11,8 @@ import { AuthContext } from './src/components/context';
 import AsyncStorage from '@react-native-community/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
 import MapStackScreen from './src/components/MapStackScreen';
+import { Provider } from 'react-redux';
+import store from './src/store/store';
 
 
 const Drawer = createDrawerNavigator();
@@ -100,25 +102,24 @@ export default function App() {
     );
   }
   return (
-    <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        
-        { 
-          loginState.userToken != null ? (
-            <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
-              <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
-              <Drawer.Screen name="SupportScreen" component={SupportScreen} />
-              <Drawer.Screen name="SettingsScreen" component={SettingsScreen} />
-              <Drawer.Screen name='Map' component={MapStackScreen} />
-            </Drawer.Navigator>
-        )
-        :
-          <RootStackScreen />
-        }
-
-      </NavigationContainer>
-    </AuthContext.Provider>
-
+    <Provider store={store}>
+      <AuthContext.Provider value={authContext}>
+        <NavigationContainer>
+          { 
+            loginState.userToken != null ? (
+              <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
+                <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
+                <Drawer.Screen name="SupportScreen" component={SupportScreen} />
+                <Drawer.Screen name="SettingsScreen" component={SettingsScreen} />
+                <Drawer.Screen name='Map' component={MapStackScreen} />
+              </Drawer.Navigator>
+          )
+          :
+            <RootStackScreen />
+          }
+        </NavigationContainer>
+      </AuthContext.Provider>
+    </Provider>
   );
 }
 

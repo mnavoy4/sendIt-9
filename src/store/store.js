@@ -4,10 +4,12 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import {
   addressPredictionsReducer,
   selectedAddressReducer,
+  pickUpLocationReducer,
   regionReducer,
   searchResultsReducer,
   toggleSearchResultReducer,
-  distanceMatrixReducer
+  distanceMatrixReducer,
+  dropOffLocationReducer
 } from '../reducers/mapReducers'
 
 const log = createLogger({ diff: true, collapsed: true });
@@ -19,7 +21,9 @@ const reducer = combineReducers({
   // home: HomeReducer,
   region: regionReducer,
   searchResults: searchResultsReducer,
-  toggleSearchResult: toggleSearchResultReducer
+  toggleSearchResult: toggleSearchResultReducer,
+  pickUpLocation: pickUpLocationReducer,
+  dropOffLocation: dropOffLocationReducer
   // addressPredictions: addressPredictionsReducer,
   // selectedAddress: selectedAddressReducer,
   // distanceMatrix: distanceMatrixReducer

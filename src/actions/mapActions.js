@@ -1,13 +1,14 @@
 import React from 'react';
-// import RNGooglePlaces from 'react-native-google-places';
-import store from '../store/store'
+import store from '../store/store';
 import {
   GET_CURRENT_LOCATION_SUCCESS,
   GET_ADDRESS_INPUT,
   TOGGLE_SEARCH_RESULT,
   GET_ADDRESS_PREDICTIONS,
   GET_SELECTED_ADDRESS,
-  GET_DISTANCE_MATRIX
+  GET_DISTANCE_MATRIX,
+  GET_PICKUP_LOCATION,
+  GET_DROPOFF_LOCATION
 } from '../constants/mapConstants';
 import request from '../util/request'
 
@@ -23,7 +24,7 @@ const getCurrentLocation = (dispatch, latitudeDelta, longitudeDelta) => {
             longitudeDelta
           }})
       }, { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-      (error) => console.log(error.message), {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+      (error) => console.log(error.message)
     );
   };
 
@@ -41,17 +42,18 @@ const toggleSearchResult = (dispatch, payload) => {
   })
 }
 
-const getAddressPredictions = (dispatch) => {
-  console.log('FIND MEEEE', store.getState());
-  // let userInput = store.getState().searchResults.inputData.value
-  // RNGooglePlaces.getAutocompletePredictions(userInput, { country: 'US' })
-  //   .then((results) => {
-  //     dispatch({
-  //       type: GET_ADDRESS_PREDICTIONS,  
-  //       payload: results
-  //     })
-  //   })
-  //   .catch((error) => console.log(error.message))
+const getPickUpLocation = (dispatch, payload) => {
+  dispatch({
+    type: GET_PICKUP_LOCATION,
+    payload
+  })
+}
+
+const getDropOffLocation = (dispatch, payload) => {
+  dispatch({
+    type: GET_DROPOFF_LOCATION,
+    payload
+  })
 }
 
 const getSelectedAddress = (dispatch, placeId, makeFalsePayload) => {
@@ -97,4 +99,4 @@ const getSelectedAddress = (dispatch, placeId, makeFalsePayload) => {
   )
 }
 
-export { getCurrentLocation, getSearchResults, toggleSearchResult, getAddressPredictions, getSelectedAddress }
+export { getCurrentLocation, getDropOffLocation, getPickUpLocation, getSearchResults, toggleSearchResult, getSelectedAddress }

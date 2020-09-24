@@ -6,7 +6,7 @@ const mapSearchBoxStyles = {
   searchBox: {
     top: 0,
     position: "absolute",
-    width: width
+    width: width,
   },
   inputWrapper:{
       marginLeft: 15,

@@ -5,7 +5,9 @@ import {
   TOGGLE_SEARCH_RESULT,
   GET_SELECTED_ADDRESS,
   GET_DISTANCE_MATRIX,
-  SET_PICKUP_AND_DROPOFF_TO_FALSE
+  SET_PICKUP_AND_DROPOFF_TO_FALSE,
+  GET_PICKUP_LOCATION,
+  GET_DROPOFF_LOCATION
 } from '../constants/mapConstants';
 const denver = {
     latitude: 39.7392,
@@ -17,6 +19,23 @@ const denver = {
 function regionReducer(state=denver, action) {
   switch(action.type) {
     case GET_CURRENT_LOCATION_SUCCESS:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+function pickUpLocationReducer(state={}, action){
+  switch(action.type){
+    case GET_PICKUP_LOCATION:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+function dropOffLocationReducer(state={}, action){
+  switch(action.type){
+    case GET_DROPOFF_LOCATION:
       return action.payload;
     default:
       return state;
@@ -71,4 +90,4 @@ function distanceMatrixReducer(state={ distanceMatrix: {} }, action) {
 }
 
 
-export { regionReducer, searchResultsReducer, toggleSearchResultReducer, addressPredictionsReducer, selectedAddressReducer, distanceMatrixReducer }
+export { pickUpLocationReducer, regionReducer, searchResultsReducer, toggleSearchResultReducer, addressPredictionsReducer, selectedAddressReducer, distanceMatrixReducer, dropOffLocationReducer }

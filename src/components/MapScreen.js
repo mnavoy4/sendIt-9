@@ -3,9 +3,10 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { getCurrentLocation } from '../actions/mapActions.js';
-import MapSearchBox from '../components/MapSearchBox';
-// import MapSearchResults from '../components/MapSearchResults';
-// import store from '../store/store'
+import MapSearchBoxStyles from '../styles/MapSearchBoxStyles'
+import mapSearchBoxStyles from '../styles/MapSearchBoxStyles';
+// import store from '../store/store';
+import MapAutoSearchBox from '../components/MapAutoSearchBox';
 
 
 export default function MapScreen() {
@@ -23,6 +24,8 @@ export default function MapScreen() {
     longitudeDelta: 0.0421,
 };
 
+  const autoCompleteHeight = height * 0.9
+
   const dispatch = useDispatch();
   useEffect(() => {
     getCurrentLocation(dispatch, LATITUDE_DELTA, LONGITUDE_DELTA)
@@ -39,8 +42,7 @@ export default function MapScreen() {
       >
         <MapView.Marker coordinate={region} pinColor='#ce3624' />
       </MapView>
-      <MapSearchBox />
-      {/* { (store.getState().toggleSearchResult.resultType.pickUp || store.getState().toggleSearchResult.resultType.dropOff) ? <MapSearchResults /> : null } */}
+      <MapAutoSearchBox />
     </View>
   )
 }
@@ -51,6 +53,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  dropOffSearchBox: {
+    top: 60
   },
   mapStyle: {
     width: Dimensions.get('window').width,

@@ -5,8 +5,10 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import createRideStyles from '../styles/CreateRideStyles';
 import NumericInput from 'react-native-numeric-input';
+import store from '../store/store';
 
 export default function CreateRideScreen({navigation}){
+
   return (
     <SafeAreaView style={createRideStyles.container}>
       <ScrollView style={createRideStyles.scrollView}>
@@ -29,11 +31,11 @@ export default function CreateRideScreen({navigation}){
           </View>
           <Item stackedLabel>
             <Label >Pick up:</Label>
-            <Input />
+            <Input value={store.getState().pickUpLocation.otherInfo.address} />
           </Item>
           <Item stackedLabel>
             <Label >Drop off:</Label>
-            <Input />
+            <Input value={store.getState().dropOffLocation.otherInfo.address} />
           </Item>
           <Item stackedLabel>
             <Label>Date:</Label>
@@ -41,6 +43,8 @@ export default function CreateRideScreen({navigation}){
               maximumDate={new Date(2022, 1, 1)}
               modalTransparent={false}
               minimumDate={new Date()}
+              animationType={'slide'}
+              locale={'en'}
             />
 
           </Item>

@@ -92,8 +92,6 @@ export default function MapAutoSearchBox(){
             address: details.formatted_address,
             placeId: details.place_id
           });
-          console.log(details.geometry.location);
-          console.log("data.description",data.description.split(','));
         }}
         placeholder='Choose drop off location'
         enableHighAccuracyLocation={true}

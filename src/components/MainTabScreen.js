@@ -1,13 +1,13 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './HomeScreen'
 import ProfileScreen from './ProfileScreen'
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import SettingsScreen from './SettingsScreen';
 import CreateRideScreen from './CreateRideScreen';
+import FindRideScreen from './FindRideScreen';
 
-const HomeStack = createStackNavigator();
+const FindRideStack = createStackNavigator();
 const CreateRideStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const SettingsStack = createStackNavigator();
@@ -23,7 +23,7 @@ export default function MainTabScreen(){
     >
       <Tab.Screen
         name="Find Ride"
-        component={HomeStackScreen}
+        component={FindRideStackScreen}
         options={{
           tabBarColor: '#352e5d',
           tabBarLabel: 'Find Ride',
@@ -69,16 +69,16 @@ export default function MainTabScreen(){
   )
 }
 
-function HomeStackScreen({navigation}){
+function FindRideStackScreen({navigation}){
   return( 
-    <HomeStack.Navigator screenOptions={{
+    <FindRideStack.Navigator screenOptions={{
       headerStyle: {
         backgroundColor: '#352e5d'
       },
       headerTintColor: '#fff',
       headerTitleStyle: { fontWeight:'bold' }
     }}>
-      <HomeStack.Screen name="Home" component={HomeScreen} options={{
+      <FindRideStack.Screen name="Home" component={FindRideScreen} options={{
       title: 'SendIt!',
       headerLeft: () => (
         <FontAwesome.Button
@@ -93,7 +93,7 @@ function HomeStackScreen({navigation}){
           </FontAwesome.Button>
       )
     }} />
-    </HomeStack.Navigator>
+    </FindRideStack.Navigator>
   )
 }
 function ProfileStackScreen({navigation}){

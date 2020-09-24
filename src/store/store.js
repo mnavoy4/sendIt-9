@@ -20,8 +20,8 @@ const enhancers = [];
 const reducer = combineReducers({
   // home: HomeReducer,
   region: regionReducer,
-  searchResults: searchResultsReducer,
-  toggleSearchResult: toggleSearchResultReducer,
+  // searchResults: searchResultsReducer,
+  // toggleSearchResult: toggleSearchResultReducer,
   pickUpLocation: pickUpLocationReducer,
   dropOffLocation: dropOffLocationReducer
   // addressPredictions: addressPredictionsReducer,

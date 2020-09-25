@@ -9,7 +9,7 @@ const createRideStyles = StyleSheet.create({
     alignItems: 'center'
   },
   scrollView: {
-    backgroundColor: '#ce3624',
+    backgroundColor: '#fff',
     marginHorizontal: 0,
     width: width
   },
@@ -18,7 +18,10 @@ const createRideStyles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     marginTop: 25,
-    color: '#fff'
+    color: '#352e5d'
+  },
+  item: {
+    marginRight: 15
   },
   signIn: {
     width: '95%',
@@ -40,10 +43,16 @@ const createRideStyles = StyleSheet.create({
     fontSize: 20,
   },
   form: {
-    backgroundColor: '#ce3624'
+    backgroundColor: '#fff'
   },
   numericInputItem: {
-    justifyContent: "space-around"
+    flex: 1,
+    flexDirection: 'row',
+    marginRight: 15,
+  },
+  numericInputText: {
+    flex: 1,
+    marginLeft: 35
   }
 });
 

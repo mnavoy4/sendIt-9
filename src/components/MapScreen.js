@@ -2,28 +2,37 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import { getCurrentLocation } from '../actions/mapActions.js';
+import { getCurrentLocation, getPickUpLocation } from '../actions/mapActions.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import MapSearchBoxStyles from '../styles/MapSearchBoxStyles'
 import mapSearchBoxStyles from '../styles/MapSearchBoxStyles';
 // import store from '../store/store';
 import MapAutoSearchBox from '../components/MapAutoSearchBox';
+import MapViewDirections from 'react-native-maps-directions';
 
 
 export default function MapScreen({navigation}) {
 
   const region = useSelector(state => state.region);
+  const pickUpLocation = useSelector(state => state.pickUpLocation);
+  const dropOffLocation = useSelector(state => state.dropOffLocation);
+  let originLatitute = pickUpLocation.coordDetails ? pickUpLocation.coordDetails.lat : "";
+  let originLongitude = pickUpLocation.coordDetails ? pickUpLocation.coordDetails.lng : "";
+  let destinationLatitute = dropOffLocation.coordDetails ? dropOffLocation.coordDetails.lat : "";
+  let destinationLongitude = dropOffLocation.coordDetails ? dropOffLocation.coordDetails.lng : "";
+  let origin = {
+    latitude: originLatitute,
+    longitude: originLongitude
+  };
+  let destination = {
+    latitude: destinationLatitute,
+    longitude: destinationLongitude
+  }
 
   const { width, height } = Dimensions.get('window');
   const ASPECT_RATIO = width / height;
   const LATITUDE_DELTA = 0.0922;
   const LONGITUDE_DELTA = ASPECT_RATIO * LATITUDE_DELTA;
-  const denver = {
-    latitude: 39.7392,
-    longitude: -104.9903,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-};
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -38,6 +47,18 @@ export default function MapScreen({navigation}) {
         region={region}
       >
         <MapView.Marker coordinate={region} pinColor='#ce3624' />
+        {
+          origin.latitude && destination.latitude ? 
+            <MapViewDirections
+              origin={origin}
+              destination={destination}
+              apiKey='AIzaSyCUapq6jDSDYvPZGlFmubHd6UeEs_EPh3Y'
+              strokeColor='#ce3624'
+              mode='DRIVING'
+              language='en'
+            /> : null
+        }
+
       </MapView>
       <MapAutoSearchBox />
       <View style={styles.button}>

@@ -78,7 +78,7 @@ function FindRideStackScreen({navigation}){
       headerTintColor: '#fff',
       headerTitleStyle: { fontWeight:'bold' }
     }}>
-      <FindRideStack.Screen name="Home" component={FindRideScreen} options={{
+      <FindRideStack.Screen name="Find Ride" component={FindRideScreen} options={{
       title: 'SendIt!',
       headerLeft: () => (
         <FontAwesome.Button

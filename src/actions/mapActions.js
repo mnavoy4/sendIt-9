@@ -46,7 +46,7 @@ const getPickUpLocation = (dispatch, payload) => {
   dispatch({
     type: GET_PICKUP_LOCATION,
     payload
-  })
+  }) 
 }
 
 const getDropOffLocation = (dispatch, payload) => {

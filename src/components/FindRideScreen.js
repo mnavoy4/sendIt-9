@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Dimensions, FlatList } from 'react-native';
 import { List, ListItem, Left, Body, Right } from 'native-base';
 import { Text, View, TouchableOpacity } from 'react-native';
@@ -11,10 +11,22 @@ import {
   Paragraph,
   Drawer
 } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { listRides } from '../actions/rideActions';
 
 const width = Dimensions.get('window').width;
 
 export default function BrowseRidesScreen({navigation}){
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    listRides(dispatch);
+    return () => {
+      //
+    }
+  }, []);
+  const ridesList = useSelector(state => state.rides.rides);
 
   return (
     <View style={styles.container}>
@@ -23,7 +35,7 @@ export default function BrowseRidesScreen({navigation}){
           Available Rides
         </Text>
         <FlatList
-          data={Rides}
+          data={ridesList}
           style={styles.list}
           renderItem={({ item }) => (
             // <View style={styles.item}>
@@ -32,6 +44,7 @@ export default function BrowseRidesScreen({navigation}){
             //   <Text>Price per Seat: ${item.pricePerSeat}</Text>
             // </View>
             <TouchableOpacity
+              key={item._id}
               style={styles.item}
             >
               <LinearGradient

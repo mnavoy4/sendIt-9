@@ -1,19 +1,67 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
 import { Button, Form, Item, Input, Label, DatePicker } from 'native-base';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import createRideStyles from '../styles/CreateRideStyles';
 import NumericInput from 'react-native-numeric-input';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import store from '../store/store';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import MapViewDirections from 'react-native-maps-directions';
+import AsyncStorage from '@react-native-community/async-storage';
+import { postRide } from '../actions/rideActions';
 
 export default function CreateRideScreen({navigation}){
 
   const pickUpLocation = useSelector(state => state.pickUpLocation);
   const dropOffLocation = useSelector(state => state.dropOffLocation);
+  const [rideDate, setRideDate] = useState('');
+  const [departureTime, setDepartureTime] = useState('');
+  const [seatsAvailable, setSeatsAvailable] = useState(0);
+  const [pricePerSeat, setPricePerSeat] = useState(0);
+  const [driver, setDriver] = useState('');
+  const fetchDriver = async () => {
+    try {
+        await AsyncStorage.getItem('name')
+        .then(setDriver)
+    } catch(error) {
+      console.log(error);
+    }
+    console.log('Done')
+  };
+  const dispatch = useDispatch();
+  
+
+  const handleCreateRide = () => {
+    // AsyncStorage.getItem('name')
+    //   .then(driver => setDriver(driver))
+    console.log(driver, pickUpLocation.otherInfo.address, dropOffLocation.otherInfo.address, rideDate, departureTime, seatsAvailable, pricePerSeat)
+    const rideToCreate = {
+      driver: 'Michael Navoy',
+      seatsAvailable: seatsAvailable,
+      pricePerSeat: pricePerSeat,
+      departureTime: departureTime,
+      date: rideDate,
+      pickUpLocation: {
+        coordinates: {
+          latitude: pickUpLocation.coordDetails.lat,
+          longitude: pickUpLocation.coordDetails.lng
+        },
+        address: pickUpLocation.otherInfo.address
+      },
+      dropOffLocation: {
+        coordinates: {
+          latitude: dropOffLocation.coordDetails.lat,
+          longitude: dropOffLocation.coordDetails.lng
+        },
+        address: dropOffLocation.otherInfo.address
+      }
+    }
+    postRide(dispatch, rideToCreate)
+  }
+
+
 
   // console.log(pickUpLocation, dropOffLocation)
  
@@ -50,19 +98,20 @@ export default function CreateRideScreen({navigation}){
             />
           </Item>
           <Item stackedLabel style={createRideStyles.item}>
-            <Label>Date:</Label>
-            <DatePicker
+            <Label>Date (mm/dd/yyy):</Label>
+            {/* <DatePicker
               maximumDate={new Date(2022, 1, 1)}
               modalTransparent={false}
               minimumDate={new Date()}
               animationType={'slide'}
               locale={'en'}
               
-            />
+            /> */}
+            <Input onChangeText={setRideDate} />
           </Item>
           <Item stackedLabel style={createRideStyles.item}>
-            <Label>Departure Time:</Label>
-            <Input />
+            <Label>Departure Time (hh:mm[am/pm]):</Label>
+            <Input onChangeText={setDepartureTime}/>
           </Item>
           <Item style={createRideStyles.numericInputItem}>
             <Text style={createRideStyles.numericInputText}>Seats available:</Text>
@@ -77,6 +126,8 @@ export default function CreateRideScreen({navigation}){
               initValue={1}
               rightButtonBackgroundColor="rgba(206,54,23,0.9)"
               leftButtonBackgroundColor="rgba(206,54,23,0.9)"
+              onChange={setSeatsAvailable}
+              value={seatsAvailable}
             />
           </Item>
           <Item style={createRideStyles.numericInputItem}>
@@ -92,12 +143,14 @@ export default function CreateRideScreen({navigation}){
               totalWidth={150}
               rightButtonBackgroundColor="rgba(206,54,23,0.9)"
               leftButtonBackgroundColor="rgba(206,54,23,0.9)"
+              onChange={setPricePerSeat}
+              value={pricePerSeat}
             />
           </Item>
           <View style={createRideStyles.button}>
             <TouchableOpacity
               style={createRideStyles.signIn}
-              onPress={() => console.log('ride posted')}
+              onPress={() => handleCreateRide()}
             >
               <LinearGradient
                 colors={['#352e5d', '#4d4678']}

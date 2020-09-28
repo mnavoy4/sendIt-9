@@ -54,4 +54,22 @@ router.post('/update/:id', (req, res) => {
     .catch(error => res.status(400).json('Error: ' + error))
 });
 
+router.post('/signin', async (req, res) => {
+  const signInUser = await User.findOne({
+    email: req.body.email,
+    password: req.body.password
+  });
+  if (signInUser){ 
+    res.send({
+      _id: signInUser.id,
+      firstName: signInUser.firstName,
+      lastName: signInUser.lastName,
+      email: signInUser.email
+      // token: getToken(signInUser)
+    })
+  } else {
+    res.status(401).send({ message: 'Invalid Email or Password' })
+  }
+})
+
 module.exports = router;

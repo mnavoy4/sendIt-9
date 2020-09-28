@@ -52,7 +52,7 @@ export default function MapScreen({navigation}) {
             <MapViewDirections
               origin={origin}
               destination={destination}
-              apiKey='AIzaSyCUapq6jDSDYvPZGlFmubHd6UeEs_EPh3Y'
+              apikey={'AIzaSyCUapq6jDSDYvPZGlFmubHd6UeEs_EPh3Y'}
               strokeColor='#ce3624'
               mode='DRIVING'
               language='en'

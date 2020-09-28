@@ -3,13 +3,15 @@ const Users = [
     id: 1,
     email: 'mnavoy4@gmail.com',
     password: 'password',
-    userToken: 'token'
+    userToken: 'token',
+    name: 'Michael Navoy'
   },
   {
     id: 2,
     email: 'email@email.com',
     password: 'password1',
-    userToken: 'token'
+    userToken: 'token',
+    name: 'Perry Martin'
   }
 ];
 

@@ -57,14 +57,23 @@ export default function App() {
         };
     }
   }
-  const [loginState, dispatch] = useReducer(loginReducer, initialLoginState)
+  const [loginState, dispatch] = useReducer(loginReducer, initialLoginState);
+
+  const getName = async () => {
+    try {
+      return await AsyncStorage.getItem('name')
+    } catch(error){
+      console.log(error)
+    }
+  }
 
   const authContext = React.useMemo(() => ({
     signIn: async (foundUser) => {
       const userToken = String(foundUser[0].userToken);
-      const email = foundUser.email
+      const email = foundUser[0].email
+      const name = foundUser[0].name;
         try {
-          await AsyncStorage.setItem('userToken', userToken)
+          await Promise.all([AsyncStorage.setItem('userToken', userToken), AsyncStorage.setItem('name', name)]);
         } catch(error) {
           console.log(error)
         }

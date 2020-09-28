@@ -42,7 +42,7 @@ export default function MapAutoSearchBox(){
         enableHighAccuracyLocation={true}
         onFail={(error) => console.error(error)}
         fetchDetails={true}
-        GoogleReverseGeocodingQuery
+        // GoogleReverseGeocodingQuery
         listViewDisplayed="true"
         styles={{
           container: {

@@ -4,6 +4,8 @@ import { FontAwesome, Feather } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
 import { AuthContext } from './context';
+import { getEmailPasswordInfo } from '../actions/userActions';
+import { useDispatch } from 'react-redux';
 
 const SignInScreen = ({navigation}) => {
 
@@ -13,6 +15,7 @@ const SignInScreen = ({navigation}) => {
   const [textInputChange, setTextInputChange] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [confirmSecureTextEntry, setConfirmSecureTextEntry] = useState(true);
+  const dispatch = useDispatch();
 
   const { signUp } = useContext(AuthContext);
 
@@ -26,6 +29,15 @@ const SignInScreen = ({navigation}) => {
       console.log(email)
       setTextInputChange(false);
     }
+  }
+
+  const handleSignUpClick = () => {
+    const emailPasswordInfo = {
+      email: email,
+      password: password
+    }
+    getEmailPasswordInfo(dispatch, emailPasswordInfo)
+    
   }
 
   const handlePasswordInputChange = (input) => {

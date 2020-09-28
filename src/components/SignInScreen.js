@@ -4,7 +4,9 @@ import { FontAwesome, Feather } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
 import { AuthContext } from './context';
-import { Users }  from '../data'
+import { Users }  from '../data';
+import AsyncStorage from '@react-native-community/async-storage';
+
 
 const SignInScreen = ({navigation}) => {
 

@@ -65,13 +65,12 @@ const CreateProfileScreen = ({navigation}) => {
   //   setConfirmSecureTextEntry(!confirmSecureTextEntry)
   // }
 
-  async function findUserToSignIn(){
+  const findUserToSignIn = async () => {
     const foundUser = await axios.get(`${usersURL}/${email}`)
-      .then(response => console.log(response.data))
-    return foundUser;
+    return foundUser.data;
   }
 
-  const handleCreateUser = async () => {
+  const handleCreateUser = () => {
     const userToCreate = {
       firstName: firstName,
       lastName: lastName,
@@ -82,10 +81,9 @@ const CreateProfileScreen = ({navigation}) => {
       age: age,
       skiOrBoard: skiOrBoard
     }
-    // console.log('FIND MEEEEEEE', userToCreate);
-    // createNewUser(dispatch, userToCreate);
-    const foundUser = findUserToSignIn()
-    console.log('FIND MEEEEEEEEE', foundUser);
+    createNewUser(dispatch, userToCreate);
+    const foundUser = findUserToSignIn();
+    console.log('FIND ME', foundUser);
     // navigation.navigate('Find Ride');
   }
 

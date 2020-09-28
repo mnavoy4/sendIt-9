@@ -37,12 +37,14 @@ export default function BrowseRidesScreen({navigation}){
         <FlatList
           data={ridesList}
           style={styles.list}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <TouchableOpacity
               key={item._id}
               style={styles.item}
             >
               <LinearGradient
+
                 colors={['#352e5d', '#ce3624']}
                 style={styles.linearGradient}
                 locations={[0.82, 1]}

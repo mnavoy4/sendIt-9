@@ -1,11 +1,10 @@
-
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
-const ExploreScreen = () => {
+const RideDetailsScreen = () => {
     return (
       <View style={styles.container}>
-        <Text>Explore Screen</Text>
+        <Text>RideDetailsScreen </Text>
         <Button
           title="Click Here"
           onPress={() => alert('Button Clicked!')}
@@ -14,7 +13,7 @@ const ExploreScreen = () => {
     );
 };
 
-export default ExploreScreen;
+export default RideDetailsScreen;
 
 const styles = StyleSheet.create({
   container: {

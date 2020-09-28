@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput, TouchableOpacity, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TextInput, TouchableOpacity, StatusBar, Alert } from 'react-native';
 import { FontAwesome, Feather } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
@@ -22,22 +22,26 @@ const SignInScreen = ({navigation}) => {
   const handleEmailInputChange = (input) => {
     if(input.length != 0){
       setEmail(input);
-      console.log(email)
       setTextInputChange(true);
     } else {
       setEmail(input);
-      console.log(email)
       setTextInputChange(false);
     }
   }
 
   const handleSignUpClick = () => {
-    const emailPasswordInfo = {
+    if (email.length == 0 || password.length == 0){
+      Alert.alert('Invalid Input', 'Email or password field cannot be empty');
+    } else if(password != confirmPassword){
+      Alert.alert('Passwords do not match')
+    } else {
+      const emailPasswordInfo = {
       email: email,
       password: password
+      }
+      getEmailPasswordInfo(dispatch, emailPasswordInfo)
+      navigation.navigate('CreateProfileScreen')
     }
-    getEmailPasswordInfo(dispatch, emailPasswordInfo)
-    
   }
 
   const handlePasswordInputChange = (input) => {
@@ -54,9 +58,6 @@ const SignInScreen = ({navigation}) => {
 
   const handleConfirmSecureTextEntryChange = () => {
     setConfirmSecureTextEntry(!confirmSecureTextEntry)
-  }
-  const handleSignUp = (email, password) => {
-    signUp(email, password)
   }
 
   return (
@@ -160,7 +161,7 @@ const SignInScreen = ({navigation}) => {
         <View style={styles.button}>
           <TouchableOpacity
             style={styles.signIn}
-            onPress={(email, password) => handleSignUp(email, password)}
+            onPress={() => handleSignUpClick()}
           >
             <LinearGradient
               colors={['#352e5d', '#4d4678']}

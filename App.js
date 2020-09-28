@@ -59,14 +59,6 @@ export default function App() {
   }
   const [loginState, dispatch] = useReducer(loginReducer, initialLoginState);
 
-  const getName = async () => {
-    try {
-      return await AsyncStorage.getItem('name')
-    } catch(error){
-      console.log(error)
-    }
-  }
-
   const authContext = React.useMemo(() => ({
     signIn: async (foundUser) => {
       const userToken = String(foundUser[0].userToken);

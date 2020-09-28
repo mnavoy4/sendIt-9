@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
 import { Button, Form, Item, Input, Label, DatePicker } from 'native-base';
 import { Text, View, TouchableOpacity } from 'react-native';
@@ -21,24 +21,18 @@ export default function CreateRideScreen({navigation}){
   const [seatsAvailable, setSeatsAvailable] = useState(0);
   const [pricePerSeat, setPricePerSeat] = useState(0);
   const [driver, setDriver] = useState('');
-  const fetchDriver = async () => {
-    try {
-        await AsyncStorage.getItem('name')
-        .then(setDriver)
-    } catch(error) {
-      console.log(error);
-    }
-    console.log('Done')
-  };
   const dispatch = useDispatch();
+
+  useEffect(()=> {
+    AsyncStorage.getItem('name')
+      .then(driver => setDriver(driver))
+  }, [])
   
 
   const handleCreateRide = () => {
-    // AsyncStorage.getItem('name')
-    //   .then(driver => setDriver(driver))
     console.log(driver, pickUpLocation.otherInfo.address, dropOffLocation.otherInfo.address, rideDate, departureTime, seatsAvailable, pricePerSeat)
     const rideToCreate = {
-      driver: 'Michael Navoy',
+      driver: driver,
       seatsAvailable: seatsAvailable,
       pricePerSeat: pricePerSeat,
       departureTime: departureTime,
@@ -58,6 +52,7 @@ export default function CreateRideScreen({navigation}){
         address: dropOffLocation.otherInfo.address
       }
     }
+    console.log('FIND MEEEEEEE', rideToCreate)
     postRide(dispatch, rideToCreate)
   }
 
@@ -66,7 +61,7 @@ export default function CreateRideScreen({navigation}){
   // console.log(pickUpLocation, dropOffLocation)
  
   return (
-    <SafeAreaView style={createRideStyles.container}>
+    <View style={createRideStyles.container}>
       <ScrollView style={createRideStyles.scrollView}>
         <Text style={createRideStyles.title}>
           Create a ride
@@ -99,14 +94,6 @@ export default function CreateRideScreen({navigation}){
           </Item>
           <Item stackedLabel style={createRideStyles.item}>
             <Label>Date (mm/dd/yyy):</Label>
-            {/* <DatePicker
-              maximumDate={new Date(2022, 1, 1)}
-              modalTransparent={false}
-              minimumDate={new Date()}
-              animationType={'slide'}
-              locale={'en'}
-              
-            /> */}
             <Input onChangeText={setRideDate} />
           </Item>
           <Item stackedLabel style={createRideStyles.item}>
@@ -163,6 +150,6 @@ export default function CreateRideScreen({navigation}){
         </Form>
 
       </ScrollView>
-  </SafeAreaView>
+  </View>
   )
 }

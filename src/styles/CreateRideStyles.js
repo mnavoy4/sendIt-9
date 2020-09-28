@@ -17,7 +17,7 @@ const createRideStyles = StyleSheet.create({
     fontSize: 36,
     textAlign: 'center',
     fontWeight: 'bold',
-    marginTop: 25,
+    marginTop: 20,
     color: '#352e5d'
   },
   item: {

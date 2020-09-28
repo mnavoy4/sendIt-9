@@ -38,11 +38,6 @@ export default function BrowseRidesScreen({navigation}){
           data={ridesList}
           style={styles.list}
           renderItem={({ item }) => (
-            // <View style={styles.item}>
-            //   <Text>Driver: {item.driver}</Text>
-            //   <Text>Seats Available: {item.seatsAvailable}</Text>
-            //   <Text>Price per Seat: ${item.pricePerSeat}</Text>
-            // </View>
             <TouchableOpacity
               key={item._id}
               style={styles.item}
@@ -85,15 +80,11 @@ const styles = StyleSheet.create({
     width: width
   },
   item: {
-
     marginLeft: 10,
-    // marginRight: 10,
-    // borderRadius: 10,
     marginTop: 10
   },
   text: {
-    fontSize: 16,
-    // color: '#ce3624',
+    fontSize: 14,
     color: '#fff',
     fontWeight: 'bold'
   },

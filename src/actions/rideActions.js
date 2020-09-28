@@ -5,7 +5,6 @@ const ridesURL = 'http://localhost:5000/rides';
 
 const listRides = (dispatch) => {
   axios.get(ridesURL)
-    // .then(result => console.log("FIND MEEEEE", result.data))
     .then(response => dispatch({ type: GET_ALL_RIDES, payload: response.data }));
 }
 

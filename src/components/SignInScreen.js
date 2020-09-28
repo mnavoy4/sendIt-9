@@ -6,6 +6,7 @@ import * as Animatable from 'react-native-animatable';
 import { AuthContext } from './context';
 import { Users }  from '../data';
 import AsyncStorage from '@react-native-community/async-storage';
+import axios from 'axios'
 
 
 const SignInScreen = ({navigation}) => {

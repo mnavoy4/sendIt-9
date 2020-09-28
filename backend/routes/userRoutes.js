@@ -23,8 +23,8 @@ router.post('/add', (req, res) => {
     .catch((error) => res.status(400).json('Error: ' + error))
 })
 
-router.get('/:id', (req, res) => {
-  User.findById(req.params.id)
+router.get('/:email', (req, res) => {
+  User.findOne({ email: req.params.email })
     .then(user => res.json(user))
     .catch(error => res.status(400).json('Error: ' + error))
 });

@@ -57,7 +57,6 @@ const getDropOffLocation = (dispatch, payload) => {
 }
 
 const getSelectedAddress = (dispatch, placeId, makeFalsePayload) => {
-  console.log('Find MEEEEEE');
   let selectedTypeOfRide = store.getState().toggleSearchResult.resultType.pickUp ? 'selectedPickUp' : 'selectedDropOff'
   return (
     RNGooglePlaces.lookUpPlaceByID(placeId)

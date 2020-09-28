@@ -11,6 +11,8 @@ import RNPickerSelect from 'react-native-picker-select';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { agesToSelect } from '../data';
 import { createNewUser } from '../actions/userActions';
+import axios from 'axios';
+const usersURL = 'http://localhost:5000/users';
 
 const CreateProfileScreen = ({navigation}) => {
 
@@ -22,6 +24,7 @@ const CreateProfileScreen = ({navigation}) => {
   const [gender, setGender] = useState('');
   const [age, setAge] = useState(0);
   const [skiOrBoard, setSkiOrBoard] = useState('');
+  const [foundUser, setFoundUser] = useState({});
 
   const [confirmSecureTextEntry, setConfirmSecureTextEntry] = useState(true);
   const dispatch = useDispatch();
@@ -40,14 +43,19 @@ const CreateProfileScreen = ({navigation}) => {
   //   }
   // }
 
-  const handleSignUpClick = () => {
-    const emailPasswordInfo = {
-      email: email,
-      password: password
+  const handleCreateAccountClick = (email, password) => {
+    const foundUser = axios.get(`${usersURL}/email`)
+    if (email.length == 0 || password.length == 0){
+      Alert.alert('Invalid Input', 'Email or password field cannot be empty');
     }
-    getEmailPasswordInfo(dispatch, emailPasswordInfo)
-    navigation.navigate('CreateProfileScreen')
-  }
+    if(!foundUser){
+      Alert.alert('Invalid User', 'Email or password is incorrect.', [
+        {text: 'Okay'}
+      ]);
+      return
+    }
+    signIn(foundUser)
+  };
 
   const handleSecureTextEntryChange = () => {
     setSecureTextEntry(!secureTextEntry)
@@ -57,7 +65,13 @@ const CreateProfileScreen = ({navigation}) => {
   //   setConfirmSecureTextEntry(!confirmSecureTextEntry)
   // }
 
-  const handleCreateUser = () => {
+  async function findUserToSignIn(){
+    const foundUser = await axios.get(`${usersURL}/${email}`)
+      .then(response => console.log(response.data))
+    return foundUser;
+  }
+
+  const handleCreateUser = async () => {
     const userToCreate = {
       firstName: firstName,
       lastName: lastName,
@@ -68,9 +82,11 @@ const CreateProfileScreen = ({navigation}) => {
       age: age,
       skiOrBoard: skiOrBoard
     }
-    console.log('FIND MEEEEEEE', userToCreate);
-    createNewUser(dispatch, userToCreate)
-    navigation.navigate('Find Ride');
+    // console.log('FIND MEEEEEEE', userToCreate);
+    // createNewUser(dispatch, userToCreate);
+    const foundUser = findUserToSignIn()
+    console.log('FIND MEEEEEEEEE', foundUser);
+    // navigation.navigate('Find Ride');
   }
 
   return (
@@ -172,7 +188,7 @@ const CreateProfileScreen = ({navigation}) => {
           <TextInput
             placeholder='Last Name'
             style={styles.textInput}
-            autoCapitalize='none'
+            autoCapitalize='words'
             onChangeText={setLastName}
           />
         </View>
@@ -211,7 +227,7 @@ const CreateProfileScreen = ({navigation}) => {
         <View style={styles.action}>
           <RNPickerSelect
             items={agesToSelect}
-            onValueChange={setGender}
+            onValueChange={setAge}
           />
         </View>
         <Text style={styles.text_footer}>Ski or Snowboard?</Text>
@@ -228,7 +244,7 @@ const CreateProfileScreen = ({navigation}) => {
               { label: 'Snowboard', value: 'Snowboard' },
               { label: 'I can do both', value: 'Both' }
             ]}
-            onValueChange={setAge}
+            onValueChange={setSkiOrBoard}
           />
         </View>
         <View style={styles.button}>

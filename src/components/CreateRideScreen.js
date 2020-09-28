@@ -52,7 +52,6 @@ export default function CreateRideScreen({navigation}){
         address: dropOffLocation.otherInfo.address
       }
     }
-    console.log('FIND MEEEEEEE', rideToCreate)
     postRide(dispatch, rideToCreate)
   }
 

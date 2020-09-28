@@ -62,7 +62,7 @@ export default function App() {
   const authContext = React.useMemo(() => ({
     signIn: async (foundUser) => {
       const userToken = String(foundUser[0].userToken);
-      const email = foundUser[0].email
+      const email = foundUser[0].email;
       const name = foundUser[0].name;
         try {
           await Promise.all([AsyncStorage.setItem('userToken', userToken), AsyncStorage.setItem('name', name)]);

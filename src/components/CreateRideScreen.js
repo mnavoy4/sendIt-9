@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, ScrollView } from 'react-native';
-import { Button, Form, Item, Input, Label, DatePicker } from 'native-base';
+import { ScrollView } from 'react-native';
+import { Form, Item, Input, Label, DatePicker } from 'native-base';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import createRideStyles from '../styles/CreateRideStyles';
 import NumericInput from 'react-native-numeric-input';
 import { useDispatch, useSelector } from 'react-redux';
-import store from '../store/store';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import MapViewDirections from 'react-native-maps-directions';
 import AsyncStorage from '@react-native-community/async-storage';
 import { postRide } from '../actions/rideActions';
 
@@ -18,8 +15,8 @@ export default function CreateRideScreen({navigation}){
   const dropOffLocation = useSelector(state => state.dropOffLocation);
   const [rideDate, setRideDate] = useState('');
   const [departureTime, setDepartureTime] = useState('');
-  const [seatsAvailable, setSeatsAvailable] = useState(0);
-  const [pricePerSeat, setPricePerSeat] = useState(0);
+  const [seatsAvailable, setSeatsAvailable] = useState(1);
+  const [pricePerSeat, setPricePerSeat] = useState(5);
   const [driver, setDriver] = useState('');
   const dispatch = useDispatch();
 
@@ -52,14 +49,9 @@ export default function CreateRideScreen({navigation}){
         address: dropOffLocation.otherInfo.address
       }
     }
-    postRide(dispatch, rideToCreate);
-    navigation.navigate('Find Ride');
+    postRide(dispatch, rideToCreate, navigation);
   }
 
-
-
-  // console.log(pickUpLocation, dropOffLocation)
- 
   return (
     <View style={createRideStyles.container}>
       <ScrollView style={createRideStyles.scrollView}>
@@ -105,14 +97,11 @@ export default function CreateRideScreen({navigation}){
             <NumericInput
               containerStyle={{marginRight: 25}}
               rounded
-              onChange={value => console.log(value)}
               minValue={0}
               maxValue={8}
               totalHeight={65}
               totalWidth={150}
               initValue={1}
-              // rightButtonBackgroundColor="rgba(206,54,23,0.9)"
-              // leftButtonBackgroundColor="rgba(206,54,23,0.9)"
               rightButtonBackgroundColor="#96dce3"
               leftButtonBackgroundColor="#96dce3"
               onChange={setSeatsAvailable}
@@ -124,14 +113,11 @@ export default function CreateRideScreen({navigation}){
             <NumericInput
               containerStyle={{marginRight: 25}}
               rounded
-              onChange={value => console.log(value)}
               minValue={0}
               maxValue={100}
               step={5}
               totalHeight={65}
               totalWidth={150}
-              // rightButtonBackgroundColor="rgba(206,54,23,0.9)"
-              // leftButtonBackgroundColor="rgba(206,54,23,0.9)"
               rightButtonBackgroundColor="#96dce3"
               leftButtonBackgroundColor="#96dce3"
               onChange={setPricePerSeat}

@@ -12,9 +12,12 @@ const listRides = (dispatch) => {
     .then(response => dispatch({ type: GET_ALL_RIDES, payload: response.data }));
 };
 
-const postRide = (dispatch, ride) => {
+const postRide = (dispatch, ride, navigation) => {
   axios.post(`${ridesURL}/add`, ride)
-    .then(response => dispatch({ type: POST_RIDE, payload: response.data }))
+    .then(response => {
+      dispatch({ type: POST_RIDE, payload: response.data })
+      navigation.navigate('Find Ride', {ride: response.data})
+    })
 };
 
 const getRideDetails = (dispatch, id) => {

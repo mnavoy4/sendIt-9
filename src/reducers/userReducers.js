@@ -1,4 +1,7 @@
-import { CREATE_NEW_USER, GET_EMAIL_PASSWORD_INFO } from '../constants/userConstants'
+import { CREATE_NEW_USER,
+  GET_EMAIL_PASSWORD_INFO,
+  SIGN_IN_USER
+} from '../constants/userConstants'
 
 function newUserReducer(state={}, action){
   switch(action.payload){
@@ -17,4 +20,13 @@ function emailPasswordInfoReducer(state={}, action){
       return state;
   }
 }
-export { newUserReducer, emailPasswordInfoReducer }
+
+function signInUserReducer(state={}, action){
+  switch(action.type){
+    case SIGN_IN_USER:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+export { newUserReducer, emailPasswordInfoReducer, signInUserReducer }

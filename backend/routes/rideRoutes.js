@@ -11,7 +11,6 @@ router.post('/add', (req, res) => {
   //find signed in user with token
     // driver: `${signedInUser.firstName} ${signedInUser.lastName}`,
 
-    // TypeError: newRide.save(...).then(...).save is not a function
   const newRide = new Ride({
     driver: req.body.driver,
     seatsAvailable: req.body.seatsAvailable,
@@ -33,7 +32,6 @@ router.post('/add', (req, res) => {
       address: req.body.dropOffLocation.address
     }
   })
-  console.log(newRide)
   newRide.save()
     .then((ride) => res.json(ride))
     .catch((error) => res.status(400).json('Error: ' + error))

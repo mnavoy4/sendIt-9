@@ -83,7 +83,7 @@ const CreateProfileScreen = ({navigation}) => {
     }
     createNewUser(dispatch, userToCreate)
     // const foundUser = findUserToSignIn();
-    console.log('FIND ME', foundUser);
+    // console.log('FIND ME', foundUser);
     // navigation.navigate('Find Ride');
   }
 

@@ -12,7 +12,7 @@ import {
   dropOffLocationReducer
 } from '../reducers/mapReducers'
 import { postRideReducer, rideDetailsReducer, ridesReducer } from '../reducers/rideReducers';
-import { emailPasswordInfoReducer, newUserReducer } from '../reducers/userReducers';
+import { emailPasswordInfoReducer, newUserReducer, signInUserReducer } from '../reducers/userReducers';
 
 const log = createLogger({ diff: true, collapsed: true });
 
@@ -30,6 +30,7 @@ const reducer = combineReducers({
   // toggleSearchResult: toggleSearchResultReducer,
   pickUpLocation: pickUpLocationReducer,
   dropOffLocation: dropOffLocationReducer,
+  signInUser: signInUserReducer,
   emailPasswordInfo: emailPasswordInfoReducer
   // addressPredictions: addressPredictionsReducer,
   // selectedAddress: selectedAddressReducer,

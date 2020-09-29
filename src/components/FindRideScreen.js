@@ -11,42 +11,37 @@ import {
   Paragraph,
   Drawer
 } from 'react-native-paper';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, connect } from 'react-redux';
 import { listRides, getRideDetails } from '../actions/rideActions';
 import { useIsFocused } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
 
-export default function BrowseRidesScreen({navigation}){
+function BrowseRidesScreen({navigation, route}){
 
   const dispatch = useDispatch();
-  const [isFocused, setIsFocused] = useState(true)
+  const isFocused = useIsFocused();
+  const ridesList = useSelector(state => state.rides.rides);
 
   useEffect(() => {
     listRides(dispatch);
-    return () => {
-      //
-    }
-  }, []);
+  }, [isFocused]);
 
-  const ridesList = useSelector(state => state.rides.rides);
   const handleRideDetailsClick = (id) => {
     getRideDetails(dispatch, id);
     navigation.navigate('Ride Details');
   }
-  console.log('FIND MEEEEEE', ridesList)
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor='#352e5d' barStyle='light-content' />
       {/* <ScrollView style={styles.scrollView}> */}
-        <Text style={styles.title} onPress={() => console.log('RIDES LISTTTTTT', ridesList)}>
+        <Text style={styles.title}>
           Available Rides
         </Text>
         <FlatList
           data={ridesList}
-          legacyImplementation={true}
-          // extraData={isFocused}
+          extraData={ridesList}
           style={styles.list}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
@@ -54,7 +49,6 @@ export default function BrowseRidesScreen({navigation}){
               key={item._id}
               style={styles.item}
               onPress={() => handleRideDetailsClick(item._id)}
-              // onPress={() => console.log(item._id)}
             >
               <LinearGradient
 
@@ -80,6 +74,13 @@ export default function BrowseRidesScreen({navigation}){
   </View>
   )
 }
+function mapStateToProps(state){
+  return {
+    rides: state.rides.rides
+  }
+}
+
+export default connect(mapStateToProps, null)(BrowseRidesScreen)
 
 const styles = StyleSheet.create({
   container: {
@@ -98,7 +99,6 @@ const styles = StyleSheet.create({
   item: {
     marginLeft: 10,
     marginTop: 12
-    // padding: 5
   },
   text: {
     fontSize: 14,
@@ -108,8 +108,6 @@ const styles = StyleSheet.create({
   linearGradient: {
     width: '98%',
     height: 120,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     borderRadius: 5,
     padding: 12
   },

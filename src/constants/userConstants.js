@@ -1,3 +1,4 @@
 export const CREATE_NEW_USER = 'CREATE_NEW_USER';
 export const GET_EMAIL_PASSWORD_INFO = 'GET_EMAIL_PASSWORD_INFO';
+export const SIGN_IN_USER = 'SIGN_IN_USER';
 

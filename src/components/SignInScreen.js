@@ -5,6 +5,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
 import { AuthContext } from './context';
 import { Users }  from '../data';
+import { signInUser } from '../actions/userActions';
+import { useDispatch } from 'react-redux';
 // import AsyncStorage from '@react-native-community/async-storage';
 // import axios from 'axios'
 
@@ -30,6 +32,8 @@ const SignInScreen = ({navigation}) => {
     }
   }
 
+  const dispatch = useDispatch()
+
   const handleLogin = (email, password) => {
     const foundUser = Users.filter(user => {
       return user.email == email && user.password == password
@@ -43,6 +47,7 @@ const SignInScreen = ({navigation}) => {
       ]);
       return
     }
+    signInUser(dispatch, email)
     signIn(foundUser)
   }
 

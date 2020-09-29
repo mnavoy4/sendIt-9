@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const rideSchema = new mongoose.Schema({
   driver: { type: String, required: true },
-  seatsAvailable: { type: Number, required: true },
+  seatsAvailable: { type: Number, required: true, default: 1 },
   pricePerSeat: { type: Number, required: true },
   departureTime: { type: String, required: true },
   date: { type: String, required: true },

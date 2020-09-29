@@ -67,7 +67,7 @@ const CreateProfileScreen = ({navigation}) => {
 
   const findUserToSignIn = async () => {
     const foundUser = await axios.get(`${usersURL}/${email}`)
-    return foundUser.data;
+    setFoundUser(foundUser.data)
   }
 
   const handleCreateUser = () => {
@@ -81,8 +81,8 @@ const CreateProfileScreen = ({navigation}) => {
       age: age,
       skiOrBoard: skiOrBoard
     }
-    createNewUser(dispatch, userToCreate);
-    const foundUser = findUserToSignIn();
+    createNewUser(dispatch, userToCreate)
+    // const foundUser = findUserToSignIn();
     console.log('FIND ME', foundUser);
     // navigation.navigate('Find Ride');
   }

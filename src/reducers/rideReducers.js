@@ -1,4 +1,4 @@
-import { GET_ALL_RIDES, POST_RIDE } from '../constants/rideConstants';
+import { GET_ALL_RIDES, POST_RIDE, GET_RIDE_DETAILS } from '../constants/rideConstants';
 
 function ridesReducer(state={rides: []}, action){
   switch(action.type){
@@ -18,4 +18,13 @@ function postRideReducer(state={}, action){
   }
 }
 
-export { ridesReducer, postRideReducer }
+function rideDetailsReducer(state={}, action){
+  switch(action.type){
+    case GET_RIDE_DETAILS:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+export { ridesReducer, postRideReducer, rideDetailsReducer }

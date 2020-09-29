@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Dimensions, FlatList } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, Dimensions, StatusBar, FlatList, ListView } from 'react-native';
 import { List, ListItem, Left, Body, Right } from 'native-base';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -12,13 +12,15 @@ import {
   Drawer
 } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { listRides } from '../actions/rideActions';
+import { listRides, getRideDetails } from '../actions/rideActions';
+import { useIsFocused } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
 
 export default function BrowseRidesScreen({navigation}){
 
   const dispatch = useDispatch();
+  const [isFocused, setIsFocused] = useState(true)
 
   useEffect(() => {
     listRides(dispatch);
@@ -26,28 +28,39 @@ export default function BrowseRidesScreen({navigation}){
       //
     }
   }, []);
+
   const ridesList = useSelector(state => state.rides.rides);
+  const handleRideDetailsClick = (id) => {
+    getRideDetails(dispatch, id);
+    navigation.navigate('Ride Details');
+  }
+  console.log('FIND MEEEEEE', ridesList)
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor='#352e5d' barStyle='light-content' />
       {/* <ScrollView style={styles.scrollView}> */}
-        <Text style={styles.title}>
+        <Text style={styles.title} onPress={() => console.log('RIDES LISTTTTTT', ridesList)}>
           Available Rides
         </Text>
         <FlatList
           data={ridesList}
+          legacyImplementation={true}
+          // extraData={isFocused}
           style={styles.list}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <TouchableOpacity
               key={item._id}
               style={styles.item}
+              onPress={() => handleRideDetailsClick(item._id)}
+              // onPress={() => console.log(item._id)}
             >
               <LinearGradient
 
-                colors={['#352e5d', '#ce3624']}
+                colors={['#352e5d', '#96dce3']}
                 style={styles.linearGradient}
-                locations={[0.82, 1]}
+                locations={[0.88, 1]}
               >
                 <View>
                   <Text style={styles.text}>Driver: {item.driver}</Text>
@@ -56,6 +69,7 @@ export default function BrowseRidesScreen({navigation}){
                 </View>
                 <View>
                   <Text style={styles.text}>Pickup: {item.pickUpLocation.address}</Text>
+                  <Text style={styles.text}>Dropoff: {item.dropOffLocation.address}</Text>
                 </View>
               </LinearGradient>
             </TouchableOpacity>
@@ -83,7 +97,8 @@ const styles = StyleSheet.create({
   },
   item: {
     marginLeft: 10,
-    marginTop: 10
+    marginTop: 12
+    // padding: 5
   },
   text: {
     fontSize: 14,
@@ -92,11 +107,11 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     width: '98%',
-    height: 95,
+    height: 120,
     // justifyContent: 'center',
     // alignItems: 'center',
     borderRadius: 5,
-    padding: 5
+    padding: 12
   },
   title: {
     fontSize: 36,

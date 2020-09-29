@@ -18,7 +18,7 @@ export default function MainTabScreen(){
   return (
     <Tab.Navigator
       initialRouteName="Find Ride"
-      activeColor="#ce3624"
+      activeColor="#96dce3"
       style={{ backgroundColor: '#352e5d' }}
     >
       <Tab.Screen

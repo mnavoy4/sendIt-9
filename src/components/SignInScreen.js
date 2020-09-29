@@ -5,8 +5,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from 'react-native-animatable';
 import { AuthContext } from './context';
 import { Users }  from '../data';
-import AsyncStorage from '@react-native-community/async-storage';
-import axios from 'axios'
+// import AsyncStorage from '@react-native-community/async-storage';
+// import axios from 'axios'
 
 
 const SignInScreen = ({navigation}) => {
@@ -78,7 +78,7 @@ const SignInScreen = ({navigation}) => {
         <Animatable.Image
               animation='bounceIn'
               duration={1500}
-            source={require('../assets/images/logo.png')}
+            source={require('../assets/images/logo2.png')}
             style={styles.logo}
             resizeMode='stretch'
           />

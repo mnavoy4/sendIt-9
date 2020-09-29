@@ -52,7 +52,8 @@ export default function CreateRideScreen({navigation}){
         address: dropOffLocation.otherInfo.address
       }
     }
-    postRide(dispatch, rideToCreate)
+    postRide(dispatch, rideToCreate);
+    navigation.navigate('Find Ride');
   }
 
 
@@ -110,8 +111,10 @@ export default function CreateRideScreen({navigation}){
               totalHeight={65}
               totalWidth={150}
               initValue={1}
-              rightButtonBackgroundColor="rgba(206,54,23,0.9)"
-              leftButtonBackgroundColor="rgba(206,54,23,0.9)"
+              // rightButtonBackgroundColor="rgba(206,54,23,0.9)"
+              // leftButtonBackgroundColor="rgba(206,54,23,0.9)"
+              rightButtonBackgroundColor="#96dce3"
+              leftButtonBackgroundColor="#96dce3"
               onChange={setSeatsAvailable}
               value={seatsAvailable}
             />
@@ -127,8 +130,10 @@ export default function CreateRideScreen({navigation}){
               step={5}
               totalHeight={65}
               totalWidth={150}
-              rightButtonBackgroundColor="rgba(206,54,23,0.9)"
-              leftButtonBackgroundColor="rgba(206,54,23,0.9)"
+              // rightButtonBackgroundColor="rgba(206,54,23,0.9)"
+              // leftButtonBackgroundColor="rgba(206,54,23,0.9)"
+              rightButtonBackgroundColor="#96dce3"
+              leftButtonBackgroundColor="#96dce3"
               onChange={setPricePerSeat}
               value={pricePerSeat}
             />

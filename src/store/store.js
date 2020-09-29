@@ -11,7 +11,7 @@ import {
   distanceMatrixReducer,
   dropOffLocationReducer
 } from '../reducers/mapReducers'
-import { postRideReducer, ridesReducer } from '../reducers/rideReducers';
+import { postRideReducer, rideDetailsReducer, ridesReducer } from '../reducers/rideReducers';
 import { emailPasswordInfoReducer, newUserReducer } from '../reducers/userReducers';
 
 const log = createLogger({ diff: true, collapsed: true });
@@ -25,6 +25,7 @@ const reducer = combineReducers({
   rides: ridesReducer,
   postRide: postRideReducer,
   newUser: newUserReducer,
+  rideDetails: rideDetailsReducer,
   // searchResults: searchResultsReducer,
   // toggleSearchResult: toggleSearchResultReducer,
   pickUpLocation: pickUpLocationReducer,

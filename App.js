@@ -13,6 +13,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MapStackScreen from './src/components/MapStackScreen';
 import { Provider } from 'react-redux';
 import store from './src/store/store';
+import RideDetailsStackScreen from './src/components/RideDetailsStackScreen';
 
 
 const Drawer = createDrawerNavigator();
@@ -113,6 +114,7 @@ export default function App() {
                 <Drawer.Screen name="SupportScreen" component={SupportScreen} />
                 <Drawer.Screen name="SettingsScreen" component={SettingsScreen} />
                 <Drawer.Screen name='Map' component={MapStackScreen} />
+                <Drawer.Screen name='Ride Details' component={RideDetailsStackScreen} />
               </Drawer.Navigator>
           )
           :

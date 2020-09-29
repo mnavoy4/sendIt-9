@@ -1,13 +1,16 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 
-const RideDetailsScreen = () => {
+const RideDetailsScreen = ({navigation}) => {
+  const rideDetails = useSelector(state => state.rideDetails);
+  console.log('FIND MMMEEEEEEE', rideDetails);
     return (
       <View style={styles.container}>
         <Text>RideDetailsScreen </Text>
         <Button
-          title="Click Here"
-          onPress={() => alert('Button Clicked!')}
+          title="Go back"
+          onPress={() => navigation.goBack()}
         />
       </View>
     );
@@ -20,5 +23,5 @@ const styles = StyleSheet.create({
     flex: 1, 
     alignItems: 'center', 
     justifyContent: 'center'
-  },
+  }
 });

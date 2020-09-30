@@ -35,7 +35,6 @@ function BrowseRidesScreen({navigation, route}){
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor='#352e5d' barStyle='light-content' />
-      {/* <ScrollView style={styles.scrollView}> */}
         <Text style={styles.title}>
           Available Rides
         </Text>
@@ -59,7 +58,7 @@ function BrowseRidesScreen({navigation, route}){
                 <View>
                   <Text style={styles.text}>Driver: {item.driver}</Text>
                   <Text style={styles.text}>Seats Available: {item.seatsAvailable}</Text>
-                  <Text style={styles.text}>Price per Seat: ${item.pricePerSeat}</Text>
+                  <Text style={styles.text}>Date: {item.date}</Text>
                 </View>
                 <View>
                   <Text style={styles.text}>Pickup: {item.pickUpLocation.address}</Text>
@@ -69,8 +68,6 @@ function BrowseRidesScreen({navigation, route}){
             </TouchableOpacity>
           )}
         />
-
-      {/* </ScrollView> */}
   </View>
   )
 }

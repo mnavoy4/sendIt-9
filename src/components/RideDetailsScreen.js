@@ -5,14 +5,18 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
-// const weatherURL = "https://api.climacell.co/v3/weather/realtime?lat=39.4816537&lon=-106.0383518&unit_system=us&fields=temp%2Cfeels_like%2Cwind_speed%2Cprecipitation%2Cprecipitation_type&apikey=Iao24Gam7wsDj4qwbAECchOLztk4j5nQ"
-
 
 const RideDetailsScreen = ({navigation}) => {
   const rideDetails = useSelector(state => state.rideDetails);
   const [signedInUser, setSignedInUser] = useState('');
-  // const { latitude, longitude } = rideDetails.dropOffLocation.coordinates;
-  // console.log('FIND MEEEE', latitude, longitude);
+  const [weatherData, setWeatherData] = useState({})
+  // if(rideDetails.dropOffLocation){
+  //   const { latitude, longitude } = rideDetails.dropOffLocation.coordinates;
+  //   console.log('FIND MEEEE', latitude, longitude);
+  //   axios.get(`https://api.climacell.co/v3/weather/realtime?lat=${latitude}&lon=${longitude}&unit_system=us&fields=temp%2Cfeels_like%2Cwind_speed%2Cprecipitation%2Cprecipitation_type&apikey=Iao24Gam7wsDj4qwbAECchOLztk4j5nQ`)
+  //     .then(response => setWeatherData(response.data))
+  //   console.log(weatherData)
+  // }
 
   useEffect(()=> {
     AsyncStorage.getItem('name')
@@ -22,10 +26,6 @@ const RideDetailsScreen = ({navigation}) => {
   const handleBookRideClick = () => {
     navigation.navigate('Find Ride');
   };
-  // const getWeatherInfo = () => {
-  //   axios.get(`https://api.climacell.co/v3/weather/realtime?lat=${latitude}&lon=${longitude}&unit_system=us&fields=temp%2Cfeels_like%2Cwind_speed%2Cprecipitation%2Cprecipitation_type&apikey=Iao24Gam7wsDj4qwbAECchOLztk4j5nQ`)
-  //     .then(response => console.log(response.data))
-  // }
 
   if(!rideDetails.pickUpLocation){
     return (
@@ -62,9 +62,9 @@ const RideDetailsScreen = ({navigation}) => {
           <View style={styles.detail}>
             <Text style={styles.detailText}><Text style={styles.boldText}>Price per seat:  </Text>${rideDetails.pricePerSeat}</Text>
           </View>
-          <View style={styles.detail}>
+          {/* <View style={styles.detail}>
             <Text style={styles.detailText}>Weather at destination: API Weather call</Text>
-          </View>
+          </View> */}
         </View>
         
         <View style={styles.button}>

@@ -29,6 +29,19 @@ export default function MapScreen({navigation}) {
     longitude: destinationLongitude
   }
 
+  let originForMap = {
+    latitude: originLatitute,
+    longitude: originLongitude,
+    latitudeDelta: 0.1,
+    longitudeDelta: 0.1
+  }
+  let destinationForMap = {
+    latitude: destinationLatitute,
+    longitude: destinationLongitude,
+    latitudeDelta: 0.1,
+    longitudeDelta: 0.1
+  }
+
   const { width, height } = Dimensions.get('window');
   const ASPECT_RATIO = width / height;
   const LATITUDE_DELTA = 0.0922;
@@ -41,25 +54,26 @@ export default function MapScreen({navigation}) {
 
   return (
     <View styles={styles.container}>
-      <MapView
+
+      { originForMap.latitude && !destinationForMap.latitude ? (
+        <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.mapStyle}
-        region={region}
-      >
-        <MapView.Marker coordinate={region} pinColor='#ce3624' />
-        {
-          origin.latitude && destination.latitude ? 
-            <MapViewDirections
-              origin={origin}
-              destination={destination}
-              apikey={'AIzaSyCUapq6jDSDYvPZGlFmubHd6UeEs_EPh3Y'}
-              strokeColor='#ce3624'
-              mode='DRIVING'
-              language='en'
-            /> : null
-        }
+        region={originForMap}
+        >
+          <MapView.Marker coordinate={originForMap} pinColor='#ce3624' />
+        </MapView>
+      ) : null }
 
-      </MapView>
+      { originForMap.latitude && destinationForMap.latitude ? (
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={styles.mapStyle}
+          region={destinationForMap}
+        >
+          <MapView.Marker coordinate={destinationForMap} pinColor='#ce3624' />
+        </MapView>
+      ) : null }
       <MapAutoSearchBox />
       <View style={styles.button}>
         <TouchableOpacity

@@ -33,16 +33,6 @@ const CreateProfileScreen = ({navigation}) => {
 
   const { email, password } = useSelector(state => state.emailPasswordInfo);
 
-  // const handleEmailInputChange = (input) => {
-  //   if(input.length != 0){
-  //     console.log(email)
-  //     setTextInputChange(true);
-  //   } else {
-  //     console.log(email)
-  //     setTextInputChange(false);
-  //   }
-  // }
-
   const handleCreateAccountClick = (email, password) => {
     const foundUser = axios.get(`${usersURL}/email`)
     if (email.length == 0 || password.length == 0){
@@ -60,10 +50,6 @@ const CreateProfileScreen = ({navigation}) => {
   const handleSecureTextEntryChange = () => {
     setSecureTextEntry(!secureTextEntry)
   }
-
-  // const handleConfirmSecureTextEntryChange = () => {
-  //   setConfirmSecureTextEntry(!confirmSecureTextEntry)
-  // }
 
   const findUserToSignIn = async () => {
     const foundUser = await axios.get(`${usersURL}/${email}`)
@@ -93,13 +79,6 @@ const CreateProfileScreen = ({navigation}) => {
       <StatusBar backgroundColor='#352e5d' barStyle='light-content' />
       <View style={styles.header}>
         <Text style={styles.text_header}>Profile Details</Text>
-        {/* <Animatable.Image
-              animation='bounceIn'
-              duration={1500}
-            source={require('../assets/images/logo.png')}
-            style={styles.logo}
-            resizeMode='stretch'
-          /> */}
       </View>
       <Animatable.View style={styles.footer} animation='fadeInUpBig'>
         <Text style={styles.first_text_footer}>Email</Text>

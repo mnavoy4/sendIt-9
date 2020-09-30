@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import { getCurrentLocation, getPickUpLocation } from '../actions/mapActions.js';
+import { getCurrentLocation } from '../actions/mapActions.js';
 import { LinearGradient } from 'expo-linear-gradient';
-import MapSearchBoxStyles from '../styles/MapSearchBoxStyles'
-import mapSearchBoxStyles from '../styles/MapSearchBoxStyles';
-// import store from '../store/store';
 import MapAutoSearchBox from '../components/MapAutoSearchBox';
-import MapViewDirections from 'react-native-maps-directions';
-
 
 export default function MapScreen({navigation}) {
 
@@ -32,14 +27,14 @@ export default function MapScreen({navigation}) {
   let originForMap = {
     latitude: originLatitute,
     longitude: originLongitude,
-    latitudeDelta: 0.1,
-    longitudeDelta: 0.1
+    latitudeDelta: 0.07,
+    longitudeDelta: 0.03
   }
   let destinationForMap = {
     latitude: destinationLatitute,
     longitude: destinationLongitude,
-    latitudeDelta: 0.1,
-    longitudeDelta: 0.1
+    latitudeDelta: 0.07,
+    longitudeDelta: 0.03
   }
 
   const { width, height } = Dimensions.get('window');
@@ -54,6 +49,16 @@ export default function MapScreen({navigation}) {
 
   return (
     <View styles={styles.container}>
+
+      { !originForMap.latitude && !destinationForMap.latitude ? (
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={styles.mapStyle}
+          region={region}
+        >
+          <MapView.Marker coordinate={region} pinColor='#ce3624' />
+        </MapView>
+      ) : null }
 
       { originForMap.latitude && !destinationForMap.latitude ? (
         <MapView

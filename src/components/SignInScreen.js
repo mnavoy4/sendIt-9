@@ -7,9 +7,6 @@ import { AuthContext } from './context';
 import { Users }  from '../data';
 import { signInUser } from '../actions/userActions';
 import { useDispatch } from 'react-redux';
-// import AsyncStorage from '@react-native-community/async-storage';
-// import axios from 'axios'
-
 
 const SignInScreen = ({navigation}) => {
 

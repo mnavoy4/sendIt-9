@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import React from 'react';
+import { View, Dimensions } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import MapSearchBoxStyles from '../styles/MapSearchBoxStyles';
-import { getPickUpLocation, getDropOffLocation, toggleSearchResult } from '../actions/mapActions';
+import { getPickUpLocation, getDropOffLocation } from '../actions/mapActions';
 import { useDispatch } from 'react-redux';
 
 
@@ -18,6 +18,7 @@ export default function MapAutoSearchBox(){
       otherInfo,
     })
   }
+  
   function handleGetDropOffLocation(coordDetails, otherInfo){
     getDropOffLocation(dispatch, {
       coordDetails,

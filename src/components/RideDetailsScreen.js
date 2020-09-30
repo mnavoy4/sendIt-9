@@ -62,9 +62,6 @@ const RideDetailsScreen = ({navigation}) => {
           <View style={styles.detail}>
             <Text style={styles.detailText}><Text style={styles.boldText}>Price per seat:  </Text>${rideDetails.pricePerSeat}</Text>
           </View>
-          {/* <View style={styles.detail}>
-            <Text style={styles.detailText}>Weather at destination: API Weather call</Text>
-          </View> */}
         </View>
         
         <View style={styles.button}>

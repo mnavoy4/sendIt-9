@@ -2,11 +2,6 @@ import React from 'react';
 import store from '../store/store';
 import {
   GET_CURRENT_LOCATION_SUCCESS,
-  GET_ADDRESS_INPUT,
-  TOGGLE_SEARCH_RESULT,
-  GET_ADDRESS_PREDICTIONS,
-  GET_SELECTED_ADDRESS,
-  GET_DISTANCE_MATRIX,
   GET_PICKUP_LOCATION,
   GET_DROPOFF_LOCATION
 } from '../constants/mapConstants';
@@ -28,19 +23,7 @@ const getCurrentLocation = (dispatch, latitudeDelta, longitudeDelta) => {
     );
   };
 
-const getSearchResults = (dispatch, payload) => {
-  dispatch({
-    type: GET_ADDRESS_INPUT,
-    payload
-  })
-}
 
-const toggleSearchResult = (dispatch, payload) => {
-  dispatch({
-    type: TOGGLE_SEARCH_RESULT,
-    payload
-  })
-}
 
 const getPickUpLocation = (dispatch, payload) => {
   dispatch({
@@ -56,46 +39,4 @@ const getDropOffLocation = (dispatch, payload) => {
   })
 }
 
-const getSelectedAddress = (dispatch, placeId, makeFalsePayload) => {
-  let selectedTypeOfRide = store.getState().toggleSearchResult.resultType.pickUp ? 'selectedPickUp' : 'selectedDropOff'
-  return (
-    RNGooglePlaces.lookUpPlaceByID(placeId)
-      .then((results) => {
-        dispatch({
-          type: GET_SELECTED_ADDRESS,
-          payload: {
-            [selectedTypeOfRide]: {
-              results
-            }
-          }
-        })
-      })
-      .then(() => {
-        dispatch({
-          type: SET_PICKUP_AND_DROPOFF_TO_FALSE,
-          makeFalsePayload
-        })
-      })
-      .then(() => {
-        if(store.getState().selectedAddress.selectedAddress.selectedDropOff
-          && store.getState().selectedAddress.selectedAddress.selectedPickUp){
-            request.get('https://maps.googleapis.com/maps/api/distancematrix/json')
-            .query({
-              origins: store.getState().selectedAddress.selectedAddress.selectedPickUp.latitude + "," + store.getState().selectedAddress.selectedAddress.selectedPickUp.longitude,
-              destinations: store.getState().selectedAddress.selectedAddress.selectedDropOff.latitude + "," + store.getState().selectedAddress.selectedAddress.selectedDropOff.longitude,
-              mode: 'driving',
-              key: 'AIzaSyCUapq6jDSDYvPZGlFmubHd6UeEs_EPh3Y'
-            })
-            .finish((error, response) => {
-              dispatch({
-                type: 'GET_DISTANCE_MATRIX',
-                payload: response.body
-              })
-            })
-          }
-      })
-      .catch(error => console.log(error.message))
-  )
-}
-
-export { getCurrentLocation, getDropOffLocation, getPickUpLocation, getSearchResults, toggleSearchResult, getSelectedAddress }
+export { getCurrentLocation, getDropOffLocation, getPickUpLocation }

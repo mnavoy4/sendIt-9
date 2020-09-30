@@ -2,13 +2,8 @@ import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import {
-  addressPredictionsReducer,
-  selectedAddressReducer,
   pickUpLocationReducer,
   regionReducer,
-  searchResultsReducer,
-  toggleSearchResultReducer,
-  distanceMatrixReducer,
   dropOffLocationReducer
 } from '../reducers/mapReducers'
 import { postRideReducer, rideDetailsReducer, ridesReducer } from '../reducers/rideReducers';
@@ -20,21 +15,15 @@ const initialState = {};
 const middleware = [thunk, log];
 const enhancers = [];
 const reducer = combineReducers({
-  // home: HomeReducer,
   region: regionReducer,
   rides: ridesReducer,
   postRide: postRideReducer,
   newUser: newUserReducer,
   rideDetails: rideDetailsReducer,
-  // searchResults: searchResultsReducer,
-  // toggleSearchResult: toggleSearchResultReducer,
   pickUpLocation: pickUpLocationReducer,
   dropOffLocation: dropOffLocationReducer,
   signInUser: signInUserReducer,
   emailPasswordInfo: emailPasswordInfoReducer
-  // addressPredictions: addressPredictionsReducer,
-  // selectedAddress: selectedAddressReducer,
-  // distanceMatrix: distanceMatrixReducer
 })
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(reducer, initialState, composeEnhancer(applyMiddleware(...middleware, ...enhancers)));

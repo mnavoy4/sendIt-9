@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Dimensions, StatusBar, FlatList, ListView } from 'react-native';
-import { List, ListItem, Left, Body, Right } from 'native-base';
+import { StyleSheet, Dimensions, StatusBar, FlatList } from 'react-native';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Rides } from '../data';
-import {
-  Avatar,
-  Title,
-  Caption,
-  Paragraph,
-  Drawer
-} from 'react-native-paper';
 import { useDispatch, useSelector, connect } from 'react-redux';
 import { listRides, getRideDetails } from '../actions/rideActions';
 import { useIsFocused } from '@react-navigation/native';

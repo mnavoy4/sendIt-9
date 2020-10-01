@@ -48,7 +48,14 @@ function BrowseRidesScreen({navigation, route}){
                 locations={[0.88, 1]}
               >
                 <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.textDriver}>Driver: {item.driver}</Text>
+                  <Text style={styles.text}>
+                    {/* <AntDesign
+                      name="arrowup"
+                      size={22}
+                      color="#96dce3"
+                    /> */}
+                    {item.pickUpLocation.address.slice(0, -5)}
+                  </Text>
                   { item.driver == 'Michael Navoy' ? (
                     <FontAwesome5
                       name='snowboarding'
@@ -63,29 +70,19 @@ function BrowseRidesScreen({navigation, route}){
                     />
                     )
                   }
-                  
                 </View>
+                
                 <View style={styles.viewToMoveUp}>
-                  {/* <Text style={styles.text}>Seats Available: {item.seatsAvailable}</Text> */}
-                  <Text style={styles.text}>{item.date}</Text>
-                {/* </View>
-                <View> */}
-                  <Text style={styles.text}>
-                    <AntDesign
-                      name="arrowup"
-                      size={22}
-                      color="#96dce3"
-                    />
-                    {item.pickUpLocation.address.slice(0, -5)}
-                  </Text>
+                  <AntDesign
+                    name="arrowdown"
+                    size={22}
+                    color="#96dce3"
+                  />
                   <Text style={styles.textDropoff}>
-                    <AntDesign
-                      name="arrowdown"
-                      size={22}
-                      color="#96dce3"
-                    />
                     {item.dropOffLocation.address.slice(0, -5)}
                   </Text>
+                  <Text style={styles.text}>{item.date}</Text>
+                  <Text style={styles.text}>Driver: {item.driver}</Text>
                 </View>
               </LinearGradient>
             </TouchableOpacity>
@@ -112,7 +109,7 @@ const styles = StyleSheet.create({
     width: width
   },
   viewToMoveUp: {
-    bottom: 12
+    bottom: 10
   },
   scrollView: {
     backgroundColor: '#fff',
@@ -141,7 +138,7 @@ const styles = StyleSheet.create({
   linearGradient: {
     width: '98%',
     height: 130,
-    borderRadius: 5,
+    borderRadius: 8,
     padding: 12
   },
   title: {

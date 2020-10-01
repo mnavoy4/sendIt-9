@@ -19,7 +19,7 @@ SendIt! is a community based ride-sharing app for ski/snowboarding trips to the 
 
 ### 2. Demo
 ___
-youtube link
+https://youtu.be/oz8nxJm1ByE
 
 ### 3.  Supporting Technologies
 ___

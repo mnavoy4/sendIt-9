@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch, useSelector, connect } from 'react-redux';
 import { listRides, getRideDetails } from '../actions/rideActions';
 import { useIsFocused } from '@react-navigation/native';
-import { FontAwesome5, AntDesign } from '@expo/vector-icons'
+import { FontAwesome5, AntDesign } from '@expo/vector-icons';
 
 const width = Dimensions.get('window').width;
 
@@ -48,7 +48,7 @@ function BrowseRidesScreen({navigation, route}){
                 locations={[0.88, 1]}
               >
                 <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.text}>
+                  <Text style={styles.textDropoff}>
                     {/* <AntDesign
                       name="arrowup"
                       size={22}
@@ -78,7 +78,7 @@ function BrowseRidesScreen({navigation, route}){
                     size={22}
                     color="#96dce3"
                   />
-                  <Text style={styles.textDropoff}>
+                  <Text style={[styles.textDropoff, {marginBottom: 6}]}>
                     {item.dropOffLocation.address.slice(0, -5)}
                   </Text>
                   <Text style={styles.text}>{item.date}</Text>
@@ -87,8 +87,8 @@ function BrowseRidesScreen({navigation, route}){
               </LinearGradient>
             </TouchableOpacity>
           )}
-        />
-  </View>
+      />
+    </View>
   )
 }
 function mapStateToProps(state){
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     width: width
   },
   viewToMoveUp: {
-    bottom: 10
+    bottom: 6
   },
   scrollView: {
     backgroundColor: '#fff',

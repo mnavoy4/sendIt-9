@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch, useSelector, connect } from 'react-redux';
 import { listRides, getRideDetails } from '../actions/rideActions';
 import { useIsFocused } from '@react-navigation/native';
+import { FontAwesome5, AntDesign } from '@expo/vector-icons'
 
 const width = Dimensions.get('window').width;
 
@@ -46,14 +47,45 @@ function BrowseRidesScreen({navigation, route}){
                 style={styles.linearGradient}
                 locations={[0.88, 1]}
               >
-                <View>
-                  <Text style={styles.text}>Driver: {item.driver}</Text>
-                  <Text style={styles.text}>Seats Available: {item.seatsAvailable}</Text>
-                  <Text style={styles.text}>Date: {item.date}</Text>
+                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <Text style={styles.textDriver}>Driver: {item.driver}</Text>
+                  { item.driver == 'Michael Navoy' ? (
+                    <FontAwesome5
+                      name='snowboarding'
+                      color='#96dce3'
+                      size={20}
+                    />
+                    ) : (
+                    <FontAwesome5
+                      name='skiing'
+                      color='#96dce3'
+                      size={20}
+                    />
+                    )
+                  }
+                  
                 </View>
-                <View>
-                  <Text style={styles.text}>Pickup: {item.pickUpLocation.address}</Text>
-                  <Text style={styles.text}>Dropoff: {item.dropOffLocation.address}</Text>
+                <View style={styles.viewToMoveUp}>
+                  {/* <Text style={styles.text}>Seats Available: {item.seatsAvailable}</Text> */}
+                  <Text style={styles.text}>{item.date}</Text>
+                {/* </View>
+                <View> */}
+                  <Text style={styles.text}>
+                    <AntDesign
+                      name="arrowup"
+                      size={22}
+                      color="#96dce3"
+                    />
+                    {item.pickUpLocation.address.slice(0, -5)}
+                  </Text>
+                  <Text style={styles.textDropoff}>
+                    <AntDesign
+                      name="arrowdown"
+                      size={22}
+                      color="#96dce3"
+                    />
+                    {item.dropOffLocation.address.slice(0, -5)}
+                  </Text>
                 </View>
               </LinearGradient>
             </TouchableOpacity>
@@ -79,6 +111,9 @@ const styles = StyleSheet.create({
   list: {
     width: width
   },
+  viewToMoveUp: {
+    bottom: 12
+  },
   scrollView: {
     backgroundColor: '#fff',
     marginHorizontal: 0,
@@ -93,9 +128,19 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold'
   },
+  textDropoff: {
+    fontSize: 16,
+    color: '#fff',
+    fontWeight: 'bold'
+  },
+  textDriver: {
+    fontSize: 16,
+    color: '#fff',
+    fontWeight: 'bold'
+  },
   linearGradient: {
     width: '98%',
-    height: 120,
+    height: 130,
     borderRadius: 5,
     padding: 12
   },

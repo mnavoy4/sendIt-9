@@ -15,7 +15,7 @@ import { AuthContext } from './context';
 
 export function DrawerContent(props){
 
-  const { signOut } = useContext(AuthContext)
+  const { signOut } = useContext(AuthContext);
 
   return (
     <View style={{flex: 1}}>

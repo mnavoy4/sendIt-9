@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import RNPickerSelect from 'react-native-picker-select';
 import { agesToSelect } from '../data';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Feather } from '@expo/vector-icons'
 
 
 const ProfileScreen = () => {

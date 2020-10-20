@@ -80,14 +80,6 @@ function selectedAddressReducer(state={ selectedAddress: {} }, action) {
   }
 }
 
-function distanceMatrixReducer(state={ distanceMatrix: {} }, action) {
-  switch(action.type) {
-    case GET_DISTANCE_MATRIX:
-      return action.payload;
-    default:
-      return state;
-  }
-}
 
 
-export { pickUpLocationReducer, regionReducer, searchResultsReducer, toggleSearchResultReducer, addressPredictionsReducer, selectedAddressReducer, distanceMatrixReducer, dropOffLocationReducer }
+export { pickUpLocationReducer, regionReducer, searchResultsReducer, toggleSearchResultReducer, addressPredictionsReducer, selectedAddressReducer, dropOffLocationReducer }

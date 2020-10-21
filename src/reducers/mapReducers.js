@@ -4,7 +4,6 @@ import {
   GET_CURRENT_LOCATION_SUCCESS,
   TOGGLE_SEARCH_RESULT,
   GET_SELECTED_ADDRESS,
-  GET_DISTANCE_MATRIX,
   SET_PICKUP_AND_DROPOFF_TO_FALSE,
   GET_PICKUP_LOCATION,
   GET_DROPOFF_LOCATION
@@ -51,17 +50,6 @@ function searchResultsReducer(state={ inputData: {} }, action) {
   }
 }
 
-function toggleSearchResultReducer(state={ resultType: {} }, action) {
-  switch(action.type) {
-    case TOGGLE_SEARCH_RESULT:
-      return action.payload;
-    case SET_PICKUP_AND_DROPOFF_TO_FALSE:
-      return action.payload;
-    default: 
-      return state;
-  }
-}
-
 function addressPredictionsReducer(state={ addressPredictions: [] }, action) {
   switch (action.type) {
     case GET_ADDRESS_PREDICTIONS:
@@ -71,15 +59,7 @@ function addressPredictionsReducer(state={ addressPredictions: [] }, action) {
   }
 }
 
-function selectedAddressReducer(state={ selectedAddress: {} }, action) {
-  switch(action.type) {
-    case GET_SELECTED_ADDRESS:
-      return action.payload;
-    default:
-      return state;
-  }
-}
 
 
 
-export { pickUpLocationReducer, regionReducer, searchResultsReducer, toggleSearchResultReducer, addressPredictionsReducer, selectedAddressReducer, dropOffLocationReducer }
+export { pickUpLocationReducer, regionReducer, searchResultsReducer, addressPredictionsReducer, dropOffLocationReducer }
